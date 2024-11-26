@@ -24,6 +24,78 @@ const { title } = Astro.props;
 	</body>
 </html>
 <style is:global>
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-SemiBold.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Regular.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Italic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-slab";
+    src: url("/fonts/hse/sans/HSESlab-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-slab";
+    src: url("/fonts/hse/sans/HSESlab-Italic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-slab";
+    src: url("/fonts/hse/sans/HSESlab-Regular.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
 	:root {
 		--accent: 136, 58, 234;
 		--accent-light: 224, 204, 250;
@@ -36,9 +108,7 @@ const { title } = Astro.props;
 		);
 	}
 	html {
-		font-family: system-ui, sans-serif;
-		background: #13151a;
-		color: #f0f0f0;
+		font-family: "HSE-sans", system-ui, sans-serif;
 	}
 	code {
 		font-family:
