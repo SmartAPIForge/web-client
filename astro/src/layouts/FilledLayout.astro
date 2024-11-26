@@ -1,0 +1,42 @@
+---
+import BaseLayout, { type BaseLayoutProps } from '@/layouts/BaseLayout.astro'
+
+interface Props extends BaseLayoutProps {
+
+}
+
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <header>
+    <div class="container">
+      <div class="header-left">
+        <a href="/" class="logo">SmartApiForge</a>
+      </div>
+      <div class="header-center">
+
+      </div>
+      <div class="header-right">
+
+      </div>
+    </div>
+  </header>
+  <div>
+    <slot/>
+  </div>
+  <footer>
+    <div>
+
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+</style>
