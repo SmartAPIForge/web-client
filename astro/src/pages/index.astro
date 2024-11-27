@@ -15,7 +15,7 @@ import FilledLayout from '@/layouts/FilledLayout.astro';
 			<div class="card card-1"></div>
 			<div class="card card-2"></div>
 		</div>
-		<div>
+		<div class="appear-effect">
 		  <img src="/images/api.svg" alt="api-image" class="image"/>
 		</div>
 	</main>
@@ -24,11 +24,12 @@ import FilledLayout from '@/layouts/FilledLayout.astro';
 <style>
 
 main {
-  margin-top: 15dvh;
+  margin: 8dvh auto 0;
   display: grid;
   grid-template-columns: 0.6fr 0.4fr;
   gap: 0.5rem;
   align-items: center;
+  justify-content: center;
 }
 
 .image {
