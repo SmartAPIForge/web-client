@@ -1,0 +1,129 @@
+---
+import { languageTag } from "@/paraglide/runtime";
+import * as m from "@/paraglide/messages.js";
+
+export interface BaseLayoutProps {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang={languageTag()}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={m.metaDescription()} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title || m.metaTitle()}</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+<style is:global>
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-SemiBold.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Regular.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Italic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-sans";
+    src: url("/fonts/hse/sans/HSESans-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-slab";
+    src: url("/fonts/hse/slab/HSESlab-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-slab";
+    src: url("/fonts/hse/slab/HSESlab-Italic.woff2") format("woff2");
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "HSE-slab";
+    src: url("/fonts/hse/slab/HSESlab-Regular.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * {
+    margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+  }
+
+	:root {
+  	
+	}
+
+	html {
+		font-family: "HSE-sans", system-ui, sans-serif;
+		font-size: 24px;
+	}
+
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+
+	a {
+	  text-decoration: none;
+	}
+</style>
