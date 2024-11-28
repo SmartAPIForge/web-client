@@ -23,6 +23,8 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
-    "@inlang/paraglide-js": "1.11.3"
+    "@inlang/paraglide-js": "1.11.3",
+    "prettier": "^3.4.1",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

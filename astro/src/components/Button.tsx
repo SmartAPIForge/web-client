@@ -17,7 +17,9 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       style={{
         padding: "10px 20px",
-        backgroundColor: disabled ? "rgba(128, 128, 128, 0.2)" : "rgba(255, 255, 255, 0.2)",
+        backgroundColor: disabled
+          ? "rgba(128, 128, 128, 0.2)"
+          : "rgba(255, 255, 255, 0.2)",
         color: "black",
         border: "none",
         borderRadius: 25,

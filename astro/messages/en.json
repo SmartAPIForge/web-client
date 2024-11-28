@@ -1,5 +1,5 @@
 {
-    "$schema": "https://inlang.com/schema/inlang-message-format",
-    "metaTitle": "SmartApiForge",
-    "metaDescription": "SmartApiForge is a tool that allows you to create and manage APIs in a simple and intuitive way."
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "metaTitle": "SmartApiForge",
+  "metaDescription": "SmartApiForge is a tool that allows you to create and manage APIs in a simple and intuitive way."
 }

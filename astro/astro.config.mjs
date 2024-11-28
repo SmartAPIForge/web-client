@@ -10,8 +10,11 @@ export default defineConfig({
     locales: ["en", "ru"],
     defaultLocale: "ru",
   },
-  integrations: [paraglide({
-    project: "./project.inlang",
-    outdir: "./src/paraglide",
-  }), react()],
+  integrations: [
+    paraglide({
+      project: "./project.inlang",
+      outdir: "./src/paraglide",
+    }),
+    react(),
+  ],
 });
