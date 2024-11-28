@@ -1,7 +1,57 @@
 ---
 import FilledLayout from "@/layouts/FilledLayout.astro";
+import Button from "@/components/Button.tsx";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+
+    const email = data.get("email");
+    const password = data.get("password");
+    const confirmedPassword = data.get("confirmed-password");
+
+    if (password !== confirmedPassword) {
+      throw new Error("Passwords do not match");
+    }
+
+    console.log(email, password);
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
 
 <FilledLayout title="Sign up">
-  <form></form>
+  <form method="POST">
+    <label for="email">Email</label><br />
+    <input
+      type="text"
+      id="email"
+      name="email"
+      required
+      minlength="4"
+      maxlength="200"
+    /><br />
+    <label for="password">Password</label><br />
+    <input
+      type="password"
+      id="password"
+      name="password"
+      required
+      minlength="8"
+      maxlength="200"
+    /><br />
+    <label for="confirmed-password">Confirm password</label><br />
+    <input
+      type="password"
+      id="confirmed-password"
+      name="confirmed-password"
+      required
+      minlength="8"
+      maxlength="200"
+    /><br />
+    <Button type="submit">Submit</Button>
+  </form>
 </FilledLayout>
