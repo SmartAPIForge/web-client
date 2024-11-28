@@ -1,5 +1,66 @@
 ---
 import FilledLayout from "@/layouts/FilledLayout.astro";
+import Button from "@/components/Button.tsx";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+
+    const email = data.get("email");
+    const password = data.get("password");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
 
-<FilledLayout title="Sign in" />
+<FilledLayout title="Sign in">
+  <form method="POST" class="form">
+    <h4>Sign in</h4>
+    <div class="block">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        id="email"
+        name="email"
+        required
+        minlength="4"
+        maxlength="200"
+      />
+    </div>
+    <div class="block">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        minlength="8"
+        maxlength="200"
+      />
+    </div>
+    <Button type="submit">Sign in</Button>
+    <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
+  </form>
+</FilledLayout>
+
+<style>
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    flex-grow: 1;
+    justify-content: center;
+  }
+
+  .block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+</style>
