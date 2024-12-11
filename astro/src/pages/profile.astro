@@ -1,0 +1,77 @@
+---
+import FilledLayout from "@/layouts/FilledLayout.astro";
+
+const profileData = {
+  username: "rumblfn",
+  email: "example@mail.com",
+  imageUrl: "https://placehold.co/400x400",
+};
+---
+
+<FilledLayout title="Profile">
+  <h1 class="title">Profile</h1>
+  <div class="info-box">
+    <div class="data-box">
+      <div class="image-box">
+        <img src={profileData.imageUrl} class="image" />
+      </div>
+      <div class="raw-data">
+        <h3>About</h3>
+        <div class="raw-data-box">
+          <div>
+            <h4 class="raw-label">Username</h4>
+            <p class="raw-value">{profileData.username}</p>
+          </div>
+          <div>
+            <h4 class="raw-label">Email</h4>
+            <p class="raw-value">{profileData.email}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-box">
+    <h3>Active APIs</h3>
+  </div>
+</FilledLayout>
+
+<style>
+  .title {
+    margin-top: 2rem;
+  }
+
+  .info-box {
+    background-color: #eeeded;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+  }
+
+  .data-box {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .image-box {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .raw-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .raw-data-box {
+    display: flex;
+    gap: 0.5rem;
+  }
+</style>
