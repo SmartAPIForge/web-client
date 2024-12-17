@@ -1,7 +1,8 @@
 ---
-import FilledLayout from "@/layouts/FilledLayout.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ApiGenerator from "@/components/react/ApiGenerator";
 ---
 
-<FilledLayout title="API Generation">
-    <h1>API Generation page</h1>
-</FilledLayout>
+<BaseLayout title="API Generation">
+  <ApiGenerator client:only />
+</BaseLayout>
