@@ -1,11 +1,9 @@
-import type { FC } from "react";
-import styles from "./index.module.scss";
+import { useSpawnModel } from "@/react/features/ModelManagement";
+import styles from "./ToolBarWidget.module.scss";
 
-interface Props {
-  spawnModel: () => void;
-}
+const ToolBarWidget = () => {
+  const { spawnModel } = useSpawnModel();
 
-const ToolBar: FC<Props> = ({ spawnModel }) => {
   return (
     <div className={styles.toolbar}>
       <div className={styles.iconBox} onClick={spawnModel}>
@@ -13,6 +11,6 @@ const ToolBar: FC<Props> = ({ spawnModel }) => {
       </div>
     </div>
   );
-};
+}
 
-export { ToolBar };
+export { ToolBarWidget };
