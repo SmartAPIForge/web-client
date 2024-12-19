@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import * as fabric from "fabric";
+import { Objects } from "@/islands/react/entities/Object/model/objects";
 
 export const useDeleteObject = (canvas: fabric.Canvas | null) => {
   useEffect(() => {
@@ -7,7 +8,13 @@ export const useDeleteObject = (canvas: fabric.Canvas | null) => {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Backspace" || event.key === "Delete") {
+        const storedObjects = Objects.get();
+        
         canvas.getActiveObjects().forEach((obj) => {
+          const object = storedObjects.find((object) => object.instance === obj);
+          if (object) {
+            Objects.remove(object);
+          }
           canvas.remove(obj);
         });
         canvas.requestRenderAll();

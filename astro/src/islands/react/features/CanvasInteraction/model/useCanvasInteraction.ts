@@ -52,7 +52,7 @@ export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
     };
 
     const onSelection: OnSelect = ({ selected }) => {
-      setSelectedObjects(selected);
+      // setSelectedObjects(selected);
     };
 
     canvas.on("mouse:down", onMouseDown);

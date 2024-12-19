@@ -44,6 +44,9 @@ dependencies:
   typescript:
     specifier: ^5.7.2
     version: 5.7.2
+  uuid:
+    specifier: ^11.0.3
+    version: 11.0.3
 
 devDependencies:
   "@inlang/paraglide-js":
@@ -7086,6 +7089,14 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /uuid@11.0.3:
+    resolution:
+      {
+        integrity: sha512-d0z310fCWv5dJwnX1Y/MncBAqGMKEzlBb1AOf7z9K8ALnd0utBX/msg/fA0+sbyN1ihbMsLhrBlnl1ak7Wa0rg==,
+      }
+    hasBin: true
+    dev: false
 
   /varint@6.0.0:
     resolution:
