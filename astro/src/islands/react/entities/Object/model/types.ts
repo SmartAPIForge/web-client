@@ -18,6 +18,7 @@ export interface Model {
   id: string;
   name: string;
   fields: Field[];
+  isSelected: boolean;
   endpoints: Endpoint[];
   instance: FabricObject;
 }

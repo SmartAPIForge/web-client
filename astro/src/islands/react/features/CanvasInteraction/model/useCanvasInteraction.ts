@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import * as fabric from "fabric";
-import { setSelectedObjects } from "@/islands/react/entities/Object/model/selectedObjects";
+import { Objects } from "@/islands/react/entities/Object/model/objects";
 
 type OnSelect = (value: { selected: fabric.FabricObject[] }) => void;
 
@@ -52,7 +52,14 @@ export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
     };
 
     const onSelection: OnSelect = ({ selected }) => {
-      // setSelectedObjects(selected);
+      if (selected.length === 0) return;
+      const updatedSelection = Objects.get().map((object) => {
+        return {
+          ...object,
+          isSelected: selected.includes(object.instance),
+        };
+      })
+      Objects.set(updatedSelection);
     };
 
     canvas.on("mouse:down", onMouseDown);

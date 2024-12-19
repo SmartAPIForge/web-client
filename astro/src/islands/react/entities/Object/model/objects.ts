@@ -12,7 +12,7 @@ function add(model: Model) {
 }
 
 function remove(model: Model) {
-  objectsStore.set(objectsStore.get().filter(m => m !== model));
+  objectsStore.set(objectsStore.get().filter((m) => m !== model));
 }
 
 function get(): Model[] {
@@ -20,6 +20,7 @@ function get(): Model[] {
 }
 
 export const Objects = {
+  store: objectsStore,
   set,
   get,
   add,

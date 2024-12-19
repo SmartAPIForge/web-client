@@ -9,9 +9,11 @@ export const useDeleteObject = (canvas: fabric.Canvas | null) => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Backspace" || event.key === "Delete") {
         const storedObjects = Objects.get();
-        
+
         canvas.getActiveObjects().forEach((obj) => {
-          const object = storedObjects.find((object) => object.instance === obj);
+          const object = storedObjects.find(
+            (object) => object.instance === obj,
+          );
           if (object) {
             Objects.remove(object);
           }
