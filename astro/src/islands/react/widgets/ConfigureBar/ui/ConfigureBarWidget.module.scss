@@ -1,0 +1,10 @@
+.rightBarContainer {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: clamp(240px, 300px, 500px);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}

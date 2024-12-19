@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import * as fabric from "fabric";
 
-export const useDeleteModel = (canvas: fabric.Canvas | null) => {
+export const useDeleteObject = (canvas: fabric.Canvas | null) => {
   useEffect(() => {
     if (!canvas) return;
-    
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Backspace" || event.key === "Delete") {
         canvas.getActiveObjects().forEach((obj) => {

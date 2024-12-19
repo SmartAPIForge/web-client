@@ -1,8 +1,8 @@
-import { useSpawnModel } from "@/react/features/ModelManagement";
+import { useSpawnObject } from "@/react/features/ObjectManagement";
 import styles from "./ToolBarWidget.module.scss";
 
 const ToolBarWidget = () => {
-  const { spawnModel } = useSpawnModel();
+  const { spawnModel } = useSpawnObject();
 
   return (
     <div className={styles.toolbar}>
@@ -11,6 +11,6 @@ const ToolBarWidget = () => {
       </div>
     </div>
   );
-}
+};
 
 export { ToolBarWidget };

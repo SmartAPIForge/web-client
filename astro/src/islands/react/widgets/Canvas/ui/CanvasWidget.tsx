@@ -8,6 +8,6 @@ const CanvasWidget = () => {
   useCanvas(canvasRef);
 
   return <canvas ref={canvasRef} className={styles.canvas} />;
-}
+};
 
-export {CanvasWidget};
+export { CanvasWidget };
