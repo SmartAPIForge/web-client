@@ -58,7 +58,7 @@ export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
           ...object,
           isSelected: selected.includes(object.instance),
         };
-      })
+      });
       Objects.set(updatedSelection);
     };
 

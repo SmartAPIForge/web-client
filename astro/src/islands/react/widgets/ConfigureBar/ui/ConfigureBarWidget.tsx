@@ -10,10 +10,12 @@ const ConfigureBarWidget = () => {
     <div className={styles.rightBarContainer}>
       <h4>Configure Bar</h4>
       <p>Selected</p>
-      {$configuringObjects.map(object => <div key={object.id}>
-        <h5>Name: {object.name}</h5>
-        <h5>Unique id: {object.id}</h5>
-      </div>)}
+      {$configuringObjects.map((object) => (
+        <div key={object.id}>
+          <h5>Name: {object.name}</h5>
+          <h5>Unique id: {object.id}</h5>
+        </div>
+      ))}
     </div>
   );
 };
