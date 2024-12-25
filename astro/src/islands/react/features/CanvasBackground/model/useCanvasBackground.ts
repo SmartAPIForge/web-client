@@ -53,7 +53,7 @@ const drawGrid = (canvas: Canvas, zoom: Zoom): Line[] => {
     );
     lines.push(line);
   }
-  
+
   canvas.insertAt(0, ...lines);
 
   return lines;

@@ -19,7 +19,7 @@ export const useDeleteObject = (canvas: fabric.Canvas | null) => {
           }
           canvas.remove(obj);
         });
-        canvas.discardActiveObject()
+        canvas.discardActiveObject();
         canvas.requestRenderAll();
       }
     };
