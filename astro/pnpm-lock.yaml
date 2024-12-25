@@ -34,6 +34,9 @@ importers:
       i18next:
         specifier: ^24.0.2
         version: 24.0.2(typescript@5.7.2)
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       nanostores:
         specifier: ^0.11.3
         version: 0.11.3
@@ -53,6 +56,9 @@ importers:
       "@inlang/paraglide-js":
         specifier: 1.11.3
         version: 1.11.3
+      "@types/lodash":
+        specifier: ^4.17.13
+        version: 4.17.13
       prettier:
         specifier: ^3.4.1
         version: 3.4.1
@@ -1392,6 +1398,12 @@ packages:
     resolution:
       {
         integrity: sha512-ugo316mmTYBl2g81zDFnZ7cfxlut3o+/EQdaP7J8QN2kY6lJ22hmQYCK5EHcJHbrW+dkCGSCPgbG8JtYj6qSrg==,
+      }
+
+  "@types/lodash@4.17.13":
+    resolution:
+      {
+        integrity: sha512-lfx+dftrEZcdBPczf9d0Qv0x+j/rfNCMuC6OcfXmO8gkfeNAY88PgKUbvG56whcN23gc27yenwF6oJZXGFpYxg==,
       }
 
   "@types/mdast@4.0.4":
@@ -5951,6 +5963,8 @@ snapshots:
   "@types/jsonwebtoken@9.0.7":
     dependencies:
       "@types/node": 22.10.0
+
+  "@types/lodash@4.17.13": {}
 
   "@types/mdast@4.0.4":
     dependencies:

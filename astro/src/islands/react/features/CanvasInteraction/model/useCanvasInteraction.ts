@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import * as fabric from "fabric";
 import { Objects } from "@/islands/react/entities/Object/model/objects";
+import {
+  setOffset,
+  debouncedSetZoom,
+} from "@/islands/react/entities/Canvas/model";
+import { CONSTS } from "@/consts";
 
 type OnSelect = (value: { selected: fabric.FabricObject[] }) => void;
 
@@ -30,6 +35,7 @@ export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
       vpt[5] += viewportPoint.y - lastPos.y;
       canvas.requestRenderAll();
       lastPos = viewportPoint;
+      setOffset(vpt[4], vpt[5]);
     };
 
     const onMouseUp = () => {
@@ -42,13 +48,15 @@ export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
 
       const delta = e.deltaY;
       let zoom = canvas.getZoom();
-      zoom *= 0.999 ** delta;
+      zoom *= CONSTS.ZOOM.COEFFICIENT ** delta;
 
-      zoom = Math.min(Math.max(zoom, 0.01), 20);
+      zoom = Math.min(Math.max(zoom, CONSTS.ZOOM.MIN), CONSTS.ZOOM.MAX);
       canvas.zoomToPoint(
         new fabric.Point({ x: e.offsetX, y: e.offsetY }),
         zoom,
       );
+
+      debouncedSetZoom(zoom);
     };
 
     const onSelection: OnSelect = ({ selected }) => {
