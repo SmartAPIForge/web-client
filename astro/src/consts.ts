@@ -2,8 +2,8 @@ export const CONSTS = {
   CONTRIBUTORS_LINK: "https://github.com/orgs/SmartAPIForge/people",
   GITHUB_ORG_LINK: "https://github.com/SmartAPIForge",
   ZOOM: {
-    MAX: 10,
-    MIN: 0.1,
+    MAX: 5,
+    MIN: 0.2,
     DEFAULT: 1,
     // Example usage: next_zoom = current_zoom * COEFFICIENT ** delta (y scroll),
     COEFFICIENT: 0.999,

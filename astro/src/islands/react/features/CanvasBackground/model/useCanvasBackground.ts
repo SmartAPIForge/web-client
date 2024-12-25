@@ -55,7 +55,6 @@ const drawGrid = (canvas: Canvas, zoom: Zoom): Line[] => {
   }
 
   canvas.add(...lines);
-  canvas.renderAll()
 
   return lines;
 };
