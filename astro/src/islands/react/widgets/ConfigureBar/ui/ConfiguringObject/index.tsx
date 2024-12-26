@@ -6,45 +6,66 @@ import { toggleIsOpened } from "@/islands/react/entities/Object/lib/toggleIsOpen
 import Input from "@/islands/react/shared/ui/Input";
 import { setName } from "@/islands/react/entities/Object/lib/setName";
 import { Objects } from "@/islands/react/entities/Object/model/objects";
+import Accordion from "@/islands/react/shared/ui/Accordion";
+import { toggleIsFieldsOpened } from "@/islands/react/entities/Object/lib/toggleIsFieldsOpened";
 
 interface Props {
   object: Model;
 }
 
+const ConfiguringObjectFields: FC<Props> = ({ object }) => {
+  return (
+    <Accordion
+      isOpened={object.generatorConfiguration.isFieldsOpened}
+      toggleIsOpened={() => toggleIsFieldsOpened(object)}
+      children={{
+        topMenu: <p>Fields</p>,
+        body: (
+          <>
+            {object.apiConfiguration.fields.map(field => (
+              <div key={field.id}>
+                <p>Field</p>
+              </div>
+            ))}
+          </>
+        ),
+      }}
+    />
+  );
+};
+
 const ConfiguringObject: FC<Props> = ({ object }) => {
   const [immediateObject, setImmediateObject] = useState(object);
 
   return (
-    <div>
-      <div className={styles.topContainer}>
-        <div className={styles.leftIconsGroup}>
-          <img
-            onClick={() => toggleIsOpened(object)}
-            className={[
-              styles.icon,
-              object.isOpened && styles.iconSelected,
-            ].join(" ")}
-            src="/icons/right-arrow.svg"
-            alt="arrow"
-          />
-        </div>
-        <Input
-          value={immediateObject.name}
-          onChange={(name) => {
-            setImmediateObject((prevState) => ({ ...prevState, name }));
-            setName(object, name);
-          }}
-        />
-        <div className={styles.rightIconsGroup}>
-          <img
-            onClick={() => Objects.remove(object)}
-            className={[styles.icon, styles.hide].join(" ")}
-            src="/icons/cancel.svg"
-            alt="delete"
-          />
-        </div>
-      </div>
-    </div>
+    <Accordion
+      isOpened={object.generatorConfiguration.isOpened}
+      toggleIsOpened={() => toggleIsOpened(object)}
+      children={{
+        topMenu: (
+          <>
+            <Input
+              value={immediateObject.apiConfiguration.name}
+              onChange={(name) => {
+                setImmediateObject((prevState) => ({ ...prevState, name }));
+                setName(object, name);
+              }}
+            />
+            <div
+              className={[styles.rightIconsGroup, styles.marginLeft].join(" ")}
+            >
+              <img
+                onClick={() => Objects.remove(object)}
+                className={[styles.icon, styles.hide].join(" ")}
+                src="/icons/cancel.svg"
+                alt="delete"
+              />
+            </div>
+          </>
+        ),
+        body: <ConfiguringObjectFields object={object} />,
+      }}
+    />
   );
 };
 
