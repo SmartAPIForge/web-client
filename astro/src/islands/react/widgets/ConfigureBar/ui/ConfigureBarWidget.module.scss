@@ -13,14 +13,6 @@
   }
 }
 
-.selectedPlaceholder {
-  text-align: center;
-  padding: 1rem 0;
-  & * {
-    font-weight: 300;
-  }
-}
-
 .configuringObjectsBox {
   display: flex;
   flex-direction: column;
@@ -28,7 +20,4 @@
     font-weight: 300;
     font-size: calc(1rem * 3 / 4);
   }
-}
-
-.configuringObjectBox {
 }
