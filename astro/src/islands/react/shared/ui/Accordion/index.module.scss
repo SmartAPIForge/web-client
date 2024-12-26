@@ -1,0 +1,28 @@
+.topContainer {
+  display: flex;
+  align-items: center;
+
+  & * {
+    height: 1rem;
+  }
+
+  &:hover .hide {
+    opacity: 1;
+  }
+}
+
+.icon {
+  transition: all 0.22s;
+  height: 100%;
+  cursor: pointer;
+  &Selected {
+    transform: rotate(90deg);
+  }
+}
+
+.marginLeft {
+  margin-left: 0.5rem;
+}
+
+.bottomContainer {
+}

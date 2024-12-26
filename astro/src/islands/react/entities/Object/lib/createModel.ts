@@ -10,27 +10,35 @@ export const createModel = (props: Partial<RectProps>) => {
 
   const model: Model = {
     id: objectId,
-    name: "Model",
-    isOpened: false,
-    isSelected: true,
-    fields: [
-      {
-        name: "id",
-        type: "int",
-        isUnique: true,
-      },
-    ],
-    endpoints: [
-      {
-        type: "GET",
-        private: false,
-      },
-      {
-        type: "DELETE",
-        private: true,
-      },
-    ],
-    instance: rect,
+    apiConfiguration: {
+      name: "Model",
+      fields: [
+        {
+          id: uuidV4(),
+          name: "id",
+          type: "int",
+          isUnique: true,
+        },
+      ],
+      endpoints: [
+        {
+          id: uuidV4(),
+          type: "GET",
+          private: false,
+        },
+        {
+          id: uuidV4(),
+          type: "DELETE",
+          private: true,
+        },
+      ],
+    },
+    generatorConfiguration: {
+      isOpened: false,
+      isFieldsOpened: false,
+      isSelected: true,
+      instance: rect,
+    },
   };
 
   Objects.add(model);

@@ -12,7 +12,7 @@ export const useDeleteObject = (canvas: fabric.Canvas | null) => {
 
         canvas.getActiveObjects().forEach((obj) => {
           const object = storedObjects.find(
-            (object) => object.instance === obj,
+            (object) => object.generatorConfiguration.instance === obj,
           );
           if (object) {
             Objects.remove(object);
