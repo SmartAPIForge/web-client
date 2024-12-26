@@ -3,6 +3,7 @@ import { useStore } from "@nanostores/react";
 import styles from "./ConfigureBarWidget.module.scss";
 import { configuringObjects } from "@/react/entities/Object/model/configuringObjects";
 import Placeholder from "@/islands/react/shared/ui/Placeholder";
+import { ConfiguringObject } from "./ConfiguringObject";
 
 const ConfigureBarWidget = () => {
   const $configuringObjects = useStore(configuringObjects);
@@ -22,12 +23,7 @@ const ConfigureBarWidget = () => {
       )}
       <div className={styles.configuringObjectsBox}>
         {$configuringObjects.map((object) => (
-          <details key={object.id} className={styles.configuringObjectBox}>
-            <summary>{object.name}</summary>
-            <div>
-              <h5>Unique id: {object.id}</h5>
-            </div>
-          </details>
+          <ConfiguringObject key={object.id} object={object} />
         ))}
       </div>
     </div>

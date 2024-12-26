@@ -7,7 +7,10 @@ import {
 } from "@/islands/react/entities/Canvas/model";
 import { CONSTS } from "@/consts";
 
-type OnSelect = (value: { selected: fabric.FabricObject[] }) => void;
+type OnSelect = (value: {
+  selected: fabric.FabricObject[];
+  deselected: fabric.FabricObject[];
+}) => void;
 
 export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
   useEffect(() => {
@@ -59,7 +62,8 @@ export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
       debouncedSetZoom(zoom);
     };
 
-    const onSelection: OnSelect = ({ selected }) => {
+    // TODO: Add logic for selecting/deselecting objects
+    const onSelection: OnSelect = ({ selected, deselected }) => {
       if (selected.length === 0) return;
       const updatedSelection = Objects.get().map((object) => {
         return {

@@ -11,6 +11,7 @@ export const createModel = (props: Partial<RectProps>) => {
   const model: Model = {
     id: objectId,
     name: "Model",
+    isOpened: false,
     isSelected: true,
     fields: [
       {

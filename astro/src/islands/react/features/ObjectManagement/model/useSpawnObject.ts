@@ -1,14 +1,11 @@
 import { useCallback } from "react";
 import * as fabric from "fabric";
 import { createModel } from "@/islands/react/entities/Object/lib/createModel";
+import { Objects } from "@/islands/react/entities/Object/model/objects";
 
 let canvasInstance: fabric.Canvas;
 
 export const useSpawnObject = (canvas?: fabric.Canvas | null) => {
-  if (canvas) {
-    canvasInstance = canvas;
-  }
-
   const spawnModel = useCallback(() => {
     if (!canvasInstance) return;
     const initialModelSize = 200;
@@ -25,6 +22,12 @@ export const useSpawnObject = (canvas?: fabric.Canvas | null) => {
 
     canvasInstance.add(model);
   }, []);
+
+  if (canvas) {
+    canvasInstance = canvas;
+    Objects.clear();
+    for (let i = 0; i < 3; ++i) spawnModel();
+  }
 
   return { spawnModel };
 };

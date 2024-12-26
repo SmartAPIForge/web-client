@@ -19,10 +19,15 @@ function get(): Model[] {
   return objectsStore.get();
 }
 
+function clear() {
+  objectsStore.set([]);
+}
+
 export const Objects = {
   store: objectsStore,
   set,
   get,
   add,
   remove,
+  clear,
 };
