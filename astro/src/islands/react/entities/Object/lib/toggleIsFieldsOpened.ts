@@ -7,6 +7,7 @@ export const toggleIsFieldsOpened = (toggleoObject: Model) => {
       const newObject = { ...obj };
       newObject.generatorConfiguration.isFieldsOpened =
         !newObject.generatorConfiguration.isFieldsOpened;
+      return newObject;
     }
     return obj;
   });
