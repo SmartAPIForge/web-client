@@ -66,10 +66,9 @@ export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
     const onSelection: OnSelect = ({ selected, deselected }) => {
       if (selected.length === 0) return;
       const updatedSelection = Objects.get().map((object) => {
-        return {
-          ...object,
-          isSelected: selected.includes(object.instance),
-        };
+        const newObject = { ...object }
+        newObject.generatorConfiguration.isSelected = selected.includes(object.generatorConfiguration.instance);
+        return newObject;
       });
       Objects.set(updatedSelection);
     };
