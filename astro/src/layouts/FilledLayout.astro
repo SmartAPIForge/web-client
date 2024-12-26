@@ -4,7 +4,7 @@ import BaseLayout, { type BaseLayoutProps } from "@/layouts/BaseLayout.astro";
 
 import * as m from "@/paraglide/messages.js";
 
-import Button from "@/components/Button.tsx";
+import Button from "@/react/shared/ui/Button";
 
 interface Props extends BaseLayoutProps {}
 
@@ -71,11 +71,6 @@ const { title } = Astro.props;
 </BaseLayout>
 
 <style>
-  hr {
-    border-color: black;
-    margin: 0 0;
-  }
-
   .header {
     margin-top: 1rem;
   }
@@ -102,6 +97,7 @@ const { title } = Astro.props;
   .sub-wrapper {
     display: flex;
     flex-direction: column;
+    margin-top: 1rem;
   }
 
   .footer-left {

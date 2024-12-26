@@ -1,0 +1,11 @@
+.input {
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  outline: none;
+  transition: all 0.22s;
+  padding: 0 0.25rem;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
