@@ -2,10 +2,18 @@ import type { FabricObject } from "fabric";
 
 export type HttpMethod = "GET" | "POST" | "DELETE";
 
+export type FieldType = "int" | "string" | "bool";
+
+export const FieldTypeOptions: { value: FieldType; label: string }[] = [
+  { value: "int", label: "Integer" },
+  { value: "string", label: "String" },
+  { value: "bool", label: "Boolean" },
+];
+
 export interface Field {
   id: string;
   name: string;
-  type: string;
+  type: FieldType;
   isUnique: boolean;
 }
 

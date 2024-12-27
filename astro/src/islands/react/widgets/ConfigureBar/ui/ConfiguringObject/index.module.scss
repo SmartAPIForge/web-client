@@ -1,3 +1,9 @@
+.icon {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+}
+
 .hide {
   opacity: 0;
   transition: all 0.22s;
@@ -10,4 +16,15 @@
 
 .marginLeft {
   margin-left: 0.5rem;
+}
+
+.hideContainer:hover .hide {
+  opacity: 0.7;
+}
+
+.menuContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
