@@ -63,7 +63,10 @@ const ConfiguringObject: FC<Props> = ({ object }) => {
                 id={`${object.id}-model-name`}
                 value={immediateObject.apiConfiguration.name}
                 onChange={(name) => {
-                  setImmediateObject((prevState) => ({ ...prevState, name }));
+                  setImmediateObject((prevState) => ({
+                    ...prevState,
+                    apiConfiguration: { ...prevState.apiConfiguration, name },
+                  }));
                   setName(object, name);
                 }}
               />

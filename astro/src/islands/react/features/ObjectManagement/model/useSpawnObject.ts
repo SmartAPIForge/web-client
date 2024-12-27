@@ -25,8 +25,6 @@ export const useSpawnObject = (canvas?: fabric.Canvas | null) => {
 
   if (canvas) {
     canvasInstance = canvas;
-    Objects.clear();
-    for (let i = 0; i < 3; ++i) spawnModel();
   }
 
   return { spawnModel };
