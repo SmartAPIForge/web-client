@@ -34,6 +34,7 @@ export interface Model {
   generatorConfiguration: {
     isOpened: boolean;
     isFieldsOpened: boolean;
+    isEndpointsOpened: boolean;
     isSelected: boolean;
     instance: FabricObject;
   };

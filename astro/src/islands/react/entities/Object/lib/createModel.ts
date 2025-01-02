@@ -36,6 +36,7 @@ export const createModel = (props: Partial<RectProps>) => {
     generatorConfiguration: {
       isOpened: false,
       isFieldsOpened: false,
+      isEndpointsOpened: false,
       isSelected: true,
       instance: rect,
     },

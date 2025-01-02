@@ -48,6 +48,39 @@ const ConfiguringObjectFields: FC<Props> = ({ object }) => {
   );
 };
 
+const ConfiguringObjectEndpoints: FC<Props> = ({ object }) => {
+  // TODO: Implement endpoints.
+  return (
+    <Accordion
+      isOpened={object.generatorConfiguration.isEndpointsOpened}
+      toggleIsOpened={() => toggleIsFieldsOpened(object)}
+      children={{
+        topMenu: (
+          <div className={styles.menuContainer}>
+            <p>Fields</p>
+            <img
+              onClick={() => createField(object)}
+              className={[styles.icon, styles.hide].join(" ")}
+              src="/icons/plus.svg"
+              alt="add"
+            />
+          </div>
+        ),
+        body:
+          object.apiConfiguration.fields.length === 0 ? (
+            <Placeholder>Press plus icon to add field</Placeholder>
+          ) : (
+            <>
+              {object.apiConfiguration.fields.map((field) => (
+                <ModelField key={field.id} field={field} />
+              ))}
+            </>
+          ),
+      }}
+    />
+  );
+}
+
 const ConfiguringObject: FC<Props> = ({ object }) => {
   const [immediateObject, setImmediateObject] = useState(object);
 
@@ -84,7 +117,10 @@ const ConfiguringObject: FC<Props> = ({ object }) => {
               </div>
             </div>
           ),
-          body: <ConfiguringObjectFields object={object} />,
+          body: <>
+            <ConfiguringObjectFields object={object} />
+            <ConfiguringObjectEndpoints object={object} />
+          </>,
         }}
       />
     </div>
