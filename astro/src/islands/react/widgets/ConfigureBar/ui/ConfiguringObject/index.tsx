@@ -13,6 +13,7 @@ import Placeholder from "@/islands/react/shared/ui/Placeholder";
 import { createField } from "@/islands/react/entities/Object/lib/createField";
 import { toggleIsEndpointsOpened } from "@/islands/react/entities/Object/lib/toggleIsEndpointsOpened";
 import { ModelEndpoint } from "../Endpoint";
+import { createEndpoint } from "@/islands/react/entities/Object/lib/createEndpoint";
 
 interface Props {
   object: Model;
@@ -48,7 +49,6 @@ const ConfiguringObjectFields: FC<Props> = ({ object }) => {
 };
 
 const ConfiguringObjectEndpoints: FC<Props> = ({ object }) => {
-  // TODO: Implement endpoints.
   return (
     <Accordion
       isOpened={object.generatorConfiguration.isEndpointsOpened}
@@ -58,7 +58,7 @@ const ConfiguringObjectEndpoints: FC<Props> = ({ object }) => {
           <div className={styles.menuContainer}>
             <p>Endpoints</p>
             <img
-              onClick={() => createField(object)}
+              onClick={() => createEndpoint(object)}
               className={[styles.icon, styles.hide].join(" ")}
               src="/icons/plus.svg"
               alt="add"

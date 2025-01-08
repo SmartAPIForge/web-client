@@ -4,11 +4,17 @@ export type HttpMethod = "GET" | "POST" | "DELETE";
 
 export type FieldType = "int" | "string" | "bool";
 
-export const FieldTypeOptions: { value: FieldType; label: string }[] = [
-  { value: "int", label: "Integer" },
-  { value: "string", label: "String" },
-  { value: "bool", label: "Boolean" },
-];
+export const HttpMethodOptions: Record<HttpMethod, string> = {
+  GET: "GET",
+  POST: "POST",
+  DELETE: "DELETE",
+}
+
+export const FieldTypeOptions: Record<FieldType, string> = {
+  int: "Integer",
+  string: "String",
+  bool: "Boolean",
+}
 
 export interface Field {
   id: string;

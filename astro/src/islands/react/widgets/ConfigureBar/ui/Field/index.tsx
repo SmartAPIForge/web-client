@@ -42,7 +42,10 @@ const ModelField: FC<Props> = ({ field }) => {
         />
         <Select
           id={field.id}
-          options={FieldTypeOptions}
+          options={Object.keys(FieldTypeOptions).map((type) => ({
+            value: type,
+            label: FieldTypeOptions[type as FieldType],
+          }))}
           value={selectedOption}
           onChange={handleSelectChange}
           name={"Type"}
