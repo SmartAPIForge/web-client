@@ -8,6 +8,7 @@ interface Props {
 }
 
 const ModelEndpoint: FC<Props> = ({ endpoint }) => {
+  // TODO: Add change method, accesebility, req/res dto.
   return <div className={styles.container}></div>;
 };
 
