@@ -8,13 +8,13 @@ export const HttpMethodOptions: Record<HttpMethod, string> = {
   GET: "GET",
   POST: "POST",
   DELETE: "DELETE",
-}
+};
 
 export const FieldTypeOptions: Record<FieldType, string> = {
   int: "Integer",
   string: "String",
   bool: "Boolean",
-}
+};
 
 export interface Field {
   id: string;

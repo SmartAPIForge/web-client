@@ -6,13 +6,9 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   text: React.ReactNode;
 }
 
-const Placeholder: FC<Props> = ({
-  text,
-  children,
-  ...rest
-}) => {
+const Placeholder: FC<Props> = ({ text, children, ...rest }) => {
   if (children) return children;
-  
+
   return (
     <div
       {...rest}

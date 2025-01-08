@@ -71,7 +71,7 @@ const ConfiguringObjectEndpoints: FC<Props> = ({ object }) => {
               <ModelEndpoint key={endpoint.id} endpoint={endpoint} />
             ))}
           </Placeholder>
-        )
+        ),
       }}
     />
   );
