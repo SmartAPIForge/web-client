@@ -13,19 +13,22 @@ const ConfigureBarWidget = () => {
       <div className={styles.headerBox}>
         <h4>Configure Bar</h4>
       </div>
-      {$configuringObjects.length === 0 && (
-        <Placeholder>
+      <Placeholder
+        text={
           <h5>
             Nothing to show <br />
             Select object(s) to configure
           </h5>
-        </Placeholder>
-      )}
-      <div className={styles.configuringObjectsBox}>
-        {$configuringObjects.map((object) => (
-          <ConfiguringObject key={object.id} object={object} />
-        ))}
-      </div>
+        }
+      >
+        {$configuringObjects.length > 0 && (
+          <div className={styles.configuringObjectsBox}>
+            {$configuringObjects.map((object) => (
+              <ConfiguringObject key={object.id} object={object} />
+            ))}
+          </div>
+        )}
+      </Placeholder>
     </div>
   );
 };

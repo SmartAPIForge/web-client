@@ -11,6 +11,8 @@ import { toggleIsFieldsOpened } from "@/islands/react/entities/Object/lib/toggle
 import { ModelField } from "../Field";
 import Placeholder from "@/islands/react/shared/ui/Placeholder";
 import { createField } from "@/islands/react/entities/Object/lib/createField";
+import { toggleIsEndpointsOpened } from "@/islands/react/entities/Object/lib/toggleIsEndpointsOpened";
+import { ModelEndpoint } from "../Endpoint";
 
 interface Props {
   object: Model;
@@ -33,16 +35,13 @@ const ConfiguringObjectFields: FC<Props> = ({ object }) => {
             />
           </div>
         ),
-        body:
-          object.apiConfiguration.fields.length === 0 ? (
-            <Placeholder>Press plus icon to add field</Placeholder>
-          ) : (
-            <>
-              {object.apiConfiguration.fields.map((field) => (
-                <ModelField key={field.id} field={field} />
-              ))}
-            </>
-          ),
+        body: (
+          <Placeholder text="Press plus icon to add field">
+            {object.apiConfiguration.fields.map((field) => (
+              <ModelField key={field.id} field={field} />
+            ))}
+          </Placeholder>
+        ),
       }}
     />
   );
@@ -53,11 +52,11 @@ const ConfiguringObjectEndpoints: FC<Props> = ({ object }) => {
   return (
     <Accordion
       isOpened={object.generatorConfiguration.isEndpointsOpened}
-      toggleIsOpened={() => toggleIsFieldsOpened(object)}
+      toggleIsOpened={() => toggleIsEndpointsOpened(object)}
       children={{
         topMenu: (
           <div className={styles.menuContainer}>
-            <p>Fields</p>
+            <p>Endpoints</p>
             <img
               onClick={() => createField(object)}
               className={[styles.icon, styles.hide].join(" ")}
@@ -66,20 +65,17 @@ const ConfiguringObjectEndpoints: FC<Props> = ({ object }) => {
             />
           </div>
         ),
-        body:
-          object.apiConfiguration.fields.length === 0 ? (
-            <Placeholder>Press plus icon to add field</Placeholder>
-          ) : (
-            <>
-              {object.apiConfiguration.fields.map((field) => (
-                <ModelField key={field.id} field={field} />
-              ))}
-            </>
-          ),
+        body: (
+          <Placeholder text="Press plus icon to add endpoints">
+            {object.apiConfiguration.endpoints.map((endpoint) => (
+              <ModelEndpoint key={endpoint.id} endpoint={endpoint} />
+            ))}
+          </Placeholder>
+        )
       }}
     />
   );
-}
+};
 
 const ConfiguringObject: FC<Props> = ({ object }) => {
   const [immediateObject, setImmediateObject] = useState(object);
@@ -117,10 +113,12 @@ const ConfiguringObject: FC<Props> = ({ object }) => {
               </div>
             </div>
           ),
-          body: <>
-            <ConfiguringObjectFields object={object} />
-            <ConfiguringObjectEndpoints object={object} />
-          </>,
+          body: (
+            <>
+              <ConfiguringObjectFields object={object} />
+              <ConfiguringObjectEndpoints object={object} />
+            </>
+          ),
         }}
       />
     </div>
