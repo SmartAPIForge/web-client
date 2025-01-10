@@ -68,7 +68,11 @@ const ConfiguringObjectEndpoints: FC<Props> = ({ object }) => {
         body: (
           <Placeholder text="Press plus icon to add endpoints">
             {object.apiConfiguration.endpoints.map((endpoint) => (
-              <ModelEndpoint key={endpoint.id} endpoint={endpoint} />
+              <ModelEndpoint
+                key={endpoint.id}
+                fields={object.apiConfiguration.fields}
+                endpoint={endpoint}
+              />
             ))}
           </Placeholder>
         ),

@@ -27,7 +27,8 @@ export interface Endpoint {
   id: string;
   type: HttpMethod;
   private: boolean;
-  // TODO: Add more props
+  query: string[];
+  responseDTO: string[];
 }
 
 export interface Model {

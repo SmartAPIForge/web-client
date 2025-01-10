@@ -12,6 +12,8 @@ export const createEndpoint = (objectIdentifier: Model) => {
           id: uuidV4(),
           type: "GET",
           private: false,
+          query: [],
+          responseDTO: [],
         });
         return newObject;
       }

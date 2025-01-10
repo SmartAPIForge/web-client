@@ -21,15 +21,14 @@ export const createModel = (props: Partial<RectProps>) => {
         },
       ],
       endpoints: [
+        // Example endpoint:
+        // With only id field, so we can provide it in DTOs.
         {
           id: uuidV4(),
           type: "GET",
           private: false,
-        },
-        {
-          id: uuidV4(),
-          type: "DELETE",
-          private: true,
+          query: ["id"],
+          responseDTO: ["id"],
         },
       ],
     },
