@@ -1,5 +1,6 @@
 import type { FC, HTMLAttributes } from "react";
 import styles from "./index.module.scss";
+
 import type React from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
