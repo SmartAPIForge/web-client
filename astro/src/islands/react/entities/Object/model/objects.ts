@@ -1,5 +1,5 @@
 import { map } from "nanostores";
-import type { Model } from "./types";
+import type { Field, Model } from "./types";
 
 const objectsStore = map<Model[]>([]);
 
