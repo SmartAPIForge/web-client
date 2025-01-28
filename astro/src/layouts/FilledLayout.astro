@@ -2,9 +2,7 @@
 import { CONSTS } from "@/consts.ts";
 import BaseLayout, { type BaseLayoutProps } from "@/layouts/BaseLayout.astro";
 
-import * as m from "@/paraglide/messages.js";
-
-import Button from "@/react/shared/ui/Button";
+import { HeaderWidget } from "@/react/widgets/Header/ui/HeaderWidget";
 
 interface Props extends BaseLayoutProps {}
 
@@ -14,32 +12,7 @@ const { title } = Astro.props;
 <BaseLayout title={title}>
   <div class="wrapper">
     <div class="pusher">
-      <header class="header">
-        <div class="container">
-          <div class="content">
-            <div class="block">
-              <a href="/">
-                <p>{m.metaTitle()}</p>
-              </a>
-            </div>
-            <div class="block">
-              <p>Home</p>
-              <p>Features</p>
-            </div>
-            <div class="block">
-              <a href="/sign-in">
-                <Button>
-                  <div class="button-content">
-                    <p>Sign In</p>
-                    <img src="/icons/right-arrow.svg" />
-                  </div>
-                </Button>
-              </a>
-            </div>
-          </div>
-          <hr />
-        </div>
-      </header>
+      <HeaderWidget />
       <div class="container pusher">
         <slot />
       </div>
@@ -70,7 +43,7 @@ const { title } = Astro.props;
   </div>
 </BaseLayout>
 
-<style>
+<style is:global>
   .header {
     margin-top: 1rem;
   }

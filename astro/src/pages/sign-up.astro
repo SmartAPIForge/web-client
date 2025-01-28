@@ -1,81 +1,40 @@
 ---
 import FilledLayout from "@/layouts/FilledLayout.astro";
-import Button from "@/react/shared/ui/Button";
+import { SignUpFormWidget } from "@/react/widgets/SignUpForm/ui/SignUpFormWidget";
+// import { request } from "../api/requests";
 
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-
-    const email = data.get("email");
-    const password = data.get("password");
-    const confirmedPassword = data.get("confirmed-password");
-
-    if (password !== confirmedPassword) {
-      throw new Error("Passwords do not match");
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
-}
+// let error = "";
+//
+// if (Astro.request.method === "POST") {
+//   try {
+//     const data = await Astro.request.formData();
+//
+//     const email = data.get("email");
+//     const password = data.get("password");
+//     const confirmedPassword = data.get("confirmed-password");
+//
+//     if (password !== confirmedPassword) {
+//       error = "Passwords do not match.";
+//       throw new Error(error);
+//     }
+//
+//     const response = await request("/auth/register", "POST", "", {
+//       email,
+//       password,
+//     });
+//     if (response && response.ok) {
+//       return Astro.redirect("/sign-in");
+//     }
+//
+//     error = "Something went wrong. Please try again later.";
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       console.error(error.message);
+//     }
+//   }
+// }
 ---
 
 <FilledLayout title="Sign up">
-  <form method="POST" class="form">
-    <h4>Sign up</h4>
-    <div class="block">
-      <label for="email">Email</label>
-      <input
-        type="text"
-        id="email"
-        name="email"
-        required
-        minlength="4"
-        maxlength="200"
-      />
-    </div>
-    <div class="block">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-        minlength="8"
-        maxlength="200"
-      />
-    </div>
-    <div class="block">
-      <label for="confirmed-password">Confirm password</label>
-      <input
-        type="password"
-        id="confirmed-password"
-        name="confirmed-password"
-        required
-        minlength="8"
-        maxlength="200"
-      />
-    </div>
-    <Button type="submit">Sign up</Button>
-  </form>
+  <SignUpFormWidget client:load />
 </FilledLayout>
-
-<style>
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 400px;
-    width: 100%;
-    margin: 0 auto;
-    flex-grow: 1;
-    justify-content: center;
-  }
-
-  .block {
-    display: flex;
-    flex-direction: column;
-    gap: 0.1rem;
-  }
-</style>

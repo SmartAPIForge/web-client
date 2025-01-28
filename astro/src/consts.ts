@@ -23,4 +23,5 @@ export const CONSTS = {
       },
     },
   },
+  API_URL: import.meta.env.PUBLIC_API,
 };
