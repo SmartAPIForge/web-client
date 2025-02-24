@@ -1,6 +1,6 @@
 import axios from "axios";
-import {authService} from "@/services/auth.ts";
-import {CONSTS} from "@/consts.ts";
+import { authService } from "@/services/auth.ts";
+import { CONSTS } from "@/consts.ts";
 
 const api = axios.create({
   baseURL: CONSTS.API_URL,
@@ -28,7 +28,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
-        await authService.refresh()
+        await authService.refresh();
         return api(originalRequest);
       } catch (refreshError) {
         localStorage.removeItem("token");

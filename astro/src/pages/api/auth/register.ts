@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import {CONSTS} from "@/consts.ts";
+import { CONSTS } from "@/consts.ts";
 
 export const POST: APIRoute = async ({ request }) => {
   const body = await request.json();
@@ -9,7 +9,7 @@ export const POST: APIRoute = async ({ request }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
-  })
+  });
   if (response && response.ok) {
     return new Response("User registered successfully", { status: 200 });
   }

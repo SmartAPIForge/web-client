@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import * as fabric from "fabric";
-import { Objects } from "@/islands/react/entities/Object/model/objects";
+import { Objects } from "@/react/entities/Object/model/objects.ts";
 import {
   setOffset,
   debouncedSetZoom,
-} from "@/islands/react/entities/Canvas/model";
-import { CONSTS } from "@/consts";
+} from "@/react/entities/Canvas/model";
+import { CONSTS } from "@/consts.ts";
 
 type OnSelect = (value: {
   selected: fabric.FabricObject[];

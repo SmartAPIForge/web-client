@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import * as fabric from "fabric";
-import { createModel } from "@/islands/react/entities/Object/lib/createModel";
+import { createModel } from "@/react/entities/Object/lib/createModel.ts";
 
 let canvasInstance: fabric.Canvas;
 

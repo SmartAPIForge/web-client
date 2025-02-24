@@ -1,9 +1,9 @@
-import { CONSTS } from "@/consts";
+import { CONSTS } from "@/consts.ts";
 import {
   offsetStore,
   zoomStore,
   type Zoom,
-} from "@/islands/react/entities/Canvas/model";
+} from "@/react/entities/Canvas/model";
 import { useStore } from "@nanostores/react";
 import { Line, type Canvas } from "fabric";
 import { useEffect } from "react";

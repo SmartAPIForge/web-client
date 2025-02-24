@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import * as fabric from "fabric";
-import { Objects } from "@/islands/react/entities/Object/model/objects";
+import { Objects } from "@/react/entities/Object/model/objects.ts";
 
 export const useDeleteObject = (canvas: fabric.Canvas | null) => {
   useEffect(() => {

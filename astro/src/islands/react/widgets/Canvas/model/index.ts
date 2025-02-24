@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import * as fabric from "fabric";
-import { useCanvasInteraction } from "@/react/features/CanvasInteraction";
-import { useObjectManagement } from "@/react/features/ObjectManagement";
-import { useCanvasBackground } from "@/islands/react/features/CanvasBackground";
+import { useCanvasInteraction } from "src/islands/react/widgets/Canvas/model/CanvasInteraction";
+import { useObjectManagement } from "src/islands/react/widgets/Canvas/model/ObjectManagement";
+import { useCanvasBackground } from "src/islands/react/widgets/Canvas/model/CanvasBackground";
 import { CONSTS } from "@/consts";
 
 export const useCanvas = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
@@ -25,7 +25,7 @@ export const useCanvas = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
     canvas.setZoom(CONSTS.ZOOM.DEFAULT);
 
     return () => {
-      canvas.dispose();
+      void canvas.dispose();
     };
   }, [canvasRef]);
 };

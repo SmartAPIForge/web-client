@@ -4,7 +4,7 @@ import styles from "./SignInFormWidget.module.scss";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {AuthError, authService} from "@/services/auth.ts";
+import { AuthError, authService } from "@/services/auth.ts";
 
 // Define the form input interface
 interface IFormInput {
@@ -58,7 +58,7 @@ export const SignInFormWidget: FC = () => {
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)} noValidate>
       <h4>Sign In</h4>
 
-        {error && <p className={styles.errorMessage}>{error}</p>}
+      {error && <p className={styles.errorMessage}>{error}</p>}
 
       {/* Email Field */}
       <div className={styles.block}>
