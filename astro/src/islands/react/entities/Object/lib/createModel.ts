@@ -1,4 +1,4 @@
-import {type FabricObject, Rect, type RectProps} from "fabric";
+import { type FabricObject, Rect, type RectProps } from "fabric";
 import type { Model } from "../model/types";
 import { v4 as uuidV4 } from "uuid";
 import { Objects } from "../model/objects";
@@ -40,5 +40,5 @@ export const createModel = (instance: FabricObject): Model => {
   };
 
   Objects.add(model);
-  return model
+  return model;
 };

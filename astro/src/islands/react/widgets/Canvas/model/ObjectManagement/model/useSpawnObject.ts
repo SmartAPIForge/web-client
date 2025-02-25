@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import * as fabric from "fabric";
 import { createModel } from "@/react/entities/Object/lib/createModel.ts";
 import { darkenColor, getRandomSoftColor } from "@/react/shared/colorUtils.ts";
-import {setName} from "@/react/entities/Object/lib/setName.ts";
+import { setName } from "@/react/entities/Object/lib/setName.ts";
 
 let canvasInstance: fabric.Canvas;
 
@@ -53,7 +53,7 @@ export const useSpawnObject = (canvas?: fabric.Canvas | null) => {
 
     const model = createModel(group);
 
-    setName(model, model.apiConfiguration.name)
+    setName(model, model.apiConfiguration.name);
 
     rect.on("scaling", () => {
       rect.set({
@@ -67,23 +67,19 @@ export const useSpawnObject = (canvas?: fabric.Canvas | null) => {
       text.set({
         left: rect.left + rect.width / 2 - text.width / 2,
         top: rect.top + rect.height / 2 - text.height / 2,
-      })
+      });
     });
 
     rect.on("moving", () => {
       text.set({
         left: rect.left + rect.width / 2 - text.width / 2,
         top: rect.top + rect.height / 2 - text.height / 2,
-      })
-    })
+      });
+    });
 
     text.on("changed", (...args) => {
-      setName(model, text.text)
-    })
-
-    text.on("editing:exited", () => {
-      setName(model, text.text.replace(/\n/g, ""))
-    })
+      setName(model, text.text);
+    });
 
     canvasInstance.add(group);
   }, []);

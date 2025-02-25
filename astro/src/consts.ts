@@ -1,6 +1,9 @@
 export const CONSTS = {
   CONTRIBUTORS_LINK: "https://github.com/orgs/SmartAPIForge/people",
   GITHUB_ORG_LINK: "https://github.com/SmartAPIForge",
+  NAMES: {
+    MAX_CHARACTERS: 20,
+  },
   ZOOM: {
     MAX: 5,
     MIN: 0.2,

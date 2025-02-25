@@ -16,7 +16,9 @@ export const useCanvas = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
   useEffect(() => {
     if (canvasRef.current === null) return;
 
-    const canvas = new fabric.Canvas(canvasRef.current, { preserveObjectStacking: true });
+    const canvas = new fabric.Canvas(canvasRef.current, {
+      preserveObjectStacking: true,
+    });
     setCanvas(canvas);
 
     canvas.setDimensions({
