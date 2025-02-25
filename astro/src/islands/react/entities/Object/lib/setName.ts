@@ -10,8 +10,11 @@ export const setName = (objectIdentifier: Model, name: string) => {
 
       // TODO: Move logic to another layer.
       const group = obj.generatorConfiguration.instance as Group;
-      const rect = group.getObjects()[0] as Rect;
-      const text = group.getObjects()[1] as IText;
+      const objects = group.getObjects();
+      if (objects.length < 2) return obj;
+
+      const rect = objects[0] as Rect;
+      const text = objects[1] as IText;
       text.set({ text: name });
       text.set({
         left: rect.left + rect.width / 2 - text.width / 2,
