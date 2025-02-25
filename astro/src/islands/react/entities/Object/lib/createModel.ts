@@ -1,12 +1,10 @@
-import { Rect, type RectProps } from "fabric";
+import {type FabricObject, Rect, type RectProps} from "fabric";
 import type { Model } from "../model/types";
 import { v4 as uuidV4 } from "uuid";
 import { Objects } from "../model/objects";
 
-export const createModel = (props: Partial<RectProps>) => {
+export const createModel = (instance: FabricObject): Model => {
   const objectId = uuidV4();
-
-  const rect = new Rect(props);
 
   const model: Model = {
     id: objectId,
@@ -37,11 +35,10 @@ export const createModel = (props: Partial<RectProps>) => {
       isFieldsOpened: false,
       isEndpointsOpened: false,
       isSelected: true,
-      instance: rect,
+      instance: instance,
     },
   };
 
   Objects.add(model);
-
-  return rect;
+  return model
 };

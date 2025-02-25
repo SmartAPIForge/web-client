@@ -4,15 +4,15 @@ import {
   type Endpoint,
   type Field,
   type HttpMethod,
-} from "@/islands/react/entities/Object/model/types";
+} from "@/react/entities/Object/model/types.ts";
 
 import styles from "./index.module.scss";
-import Select from "@/islands/react/shared/ui/Select";
-import { setEndpointHttpMethodType } from "@/islands/react/entities/Object/lib/setEndpointHttpMethod";
-import Input from "@/islands/react/shared/ui/Input";
-import { toggleEndpointPrivate } from "@/islands/react/entities/Object/lib/toggleEndpointPrivate";
-import { toggleResponseField } from "@/islands/react/entities/Object/lib/toggleResponseField";
-import { toggleRequestField } from "@/islands/react/entities/Object/lib/toggleRequesField";
+import Select from "@/react/shared/ui/Select";
+import { setEndpointHttpMethodType } from "@/react/entities/Object/lib/setEndpointHttpMethod.ts";
+import Input from "@/react/shared/ui/Input";
+import { toggleEndpointPrivate } from "@/react/entities/Object/lib/toggleEndpointPrivate.ts";
+import { toggleResponseField } from "@/react/entities/Object/lib/toggleResponseField.ts";
+import { toggleRequestField } from "@/react/entities/Object/lib/toggleRequesField.ts";
 
 interface Props {
   fields: Field[];

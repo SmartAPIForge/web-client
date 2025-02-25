@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/react": "^3.6.3",
+    "@astrojs/react": "^4.2.0",
     "@hookform/resolvers": "^3.10.0",
     "@inlang/paraglide-astro": "^0.2.2",
     "@nanostores/react": "^0.8.4",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "astro": "^4.16.13",
+    "astro": "^5.3.1",
     "axios": "^1.7.9",
     "fabric": "^6.5.3",
     "i18next": "^24.0.2",
@@ -35,7 +35,6 @@
     "@inlang/paraglide-js": "1.11.3",
     "@types/lodash": "^4.17.13",
     "prettier": "^3.4.1",
-    "prettier-plugin-astro": "^0.14.1",
-    "sass-embedded": "^1.83.0"
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

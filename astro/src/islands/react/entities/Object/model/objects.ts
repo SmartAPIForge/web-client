@@ -12,6 +12,8 @@ function add(model: Model) {
 }
 
 function remove(model: Model) {
+  const instance = model.generatorConfiguration.instance;
+  if (instance) instance.canvas?.remove(instance);
   objectsStore.set(objectsStore.get().filter((m) => m !== model));
 }
 

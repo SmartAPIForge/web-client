@@ -3,14 +3,14 @@ import {
   FieldTypeOptions,
   type Field,
   type FieldType,
-} from "@/islands/react/entities/Object/model/types";
-import Input from "@/islands/react/shared/ui/Input";
-import Select from "@/islands/react/shared/ui/Select";
+} from "@/react/entities/Object/model/types.ts";
+import Input from "@/react/shared/ui/Input";
+import Select from "@/react/shared/ui/Select";
 
 import styles from "./index.module.scss";
-import { setFieldName } from "@/islands/react/entities/Object/lib/setFieldName";
-import { setFieldType } from "@/islands/react/entities/Object/lib/setFieldType";
-import { removeField } from "@/islands/react/entities/Object/lib/removeField";
+import { setFieldName } from "@/react/entities/Object/lib/setFieldName.ts";
+import { setFieldType } from "@/react/entities/Object/lib/setFieldType.ts";
+import { removeField } from "@/react/entities/Object/lib/removeField.ts";
 
 interface Props {
   field: Field;

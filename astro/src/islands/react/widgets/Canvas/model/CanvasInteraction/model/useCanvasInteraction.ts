@@ -1,96 +1,71 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import * as fabric from "fabric";
-import { Objects } from "@/react/entities/Object/model/objects.ts";
-import {
-  setOffset,
-  debouncedSetZoom,
-} from "@/react/entities/Canvas/model";
+import { setOffset, debouncedSetZoom } from "@/react/entities/Canvas/model";
 import { CONSTS } from "@/consts.ts";
 
-type OnSelect = (value: {
-  selected: fabric.FabricObject[];
-  deselected: fabric.FabricObject[];
-}) => void;
-
 export const useCanvasInteraction = (canvas: fabric.Canvas | null) => {
-  useEffect(() => {
-    if (!canvas) return;
+  const isPanningRef = useRef(false);
+  const lastPosRef = useRef({ x: 0, y: 0 });
 
-    let isPanning = false;
-    let lastPos = { x: 0, y: 0 };
+  const onMouseDown = useCallback(
+    ({ e, viewportPoint }: fabric.TPointerEventInfo<MouseEvent>) => {
+      if (!e.altKey) return;
+      isPanningRef.current = true;
+      lastPosRef.current = viewportPoint;
+      e.stopPropagation();
+    },
+    [],
+  );
 
-    const onMouseDown = ({
-      e: event,
-      viewportPoint,
-    }: fabric.TPointerEventInfo<MouseEvent>) => {
-      if (!event.altKey) return;
-      isPanning = true;
-      lastPos = viewportPoint;
-      event.stopPropagation();
-    };
-
-    const onMouseMove = ({
-      viewportPoint,
-    }: fabric.TPointerEventInfo<MouseEvent>) => {
-      if (!isPanning) return;
+  const onMouseMove = useCallback(
+    ({ viewportPoint }: fabric.TPointerEventInfo<MouseEvent>) => {
+      if (!isPanningRef.current || !canvas) return;
       const vpt = canvas.viewportTransform;
-      vpt[4] += viewportPoint.x - lastPos.x;
-      vpt[5] += viewportPoint.y - lastPos.y;
-      canvas.requestRenderAll();
-      lastPos = viewportPoint;
+      const dx = viewportPoint.x - lastPosRef.current.x;
+      const dy = viewportPoint.y - lastPosRef.current.y;
+      vpt[4] += dx;
+      vpt[5] += dy;
+      lastPosRef.current = viewportPoint;
       setOffset(vpt[4], vpt[5]);
-    };
+    },
+    [canvas],
+  );
 
-    const onMouseUp = () => {
-      isPanning = false;
-    };
+  const onMouseUp = useCallback(() => {
+    isPanningRef.current = false;
+  }, []);
 
-    const onMouseWheel = ({ e }: fabric.TPointerEventInfo<WheelEvent>) => {
+  const onMouseWheel = useCallback(
+    ({ e }: fabric.TPointerEventInfo<WheelEvent>) => {
       e.preventDefault();
       e.stopPropagation();
 
       const delta = e.deltaY;
-      let zoom = canvas.getZoom();
+      let zoom = canvas!.getZoom();
       zoom *= CONSTS.ZOOM.COEFFICIENT ** delta;
-
       zoom = Math.min(Math.max(zoom, CONSTS.ZOOM.MIN), CONSTS.ZOOM.MAX);
-      canvas.zoomToPoint(
+      canvas!.zoomToPoint(
         new fabric.Point({ x: e.offsetX, y: e.offsetY }),
         zoom,
       );
-
       debouncedSetZoom(zoom);
-    };
+    },
+    [canvas],
+  );
 
-    // TODO: Add logic for selecting/deselecting objects
-    const onSelection: OnSelect = ({ selected, deselected }) => {
-      if (selected.length === 0) return;
-      const updatedSelection = Objects.get().map((object) => {
-        const newObject = { ...object };
-        newObject.generatorConfiguration.isSelected = selected.includes(
-          object.generatorConfiguration.instance,
-        );
-        return newObject;
-      });
-      Objects.set(updatedSelection);
-    };
+  useEffect(() => {
+    if (!canvas) return;
 
     canvas.on("mouse:down", onMouseDown);
     canvas.on("mouse:move", onMouseMove);
     canvas.on("mouse:up", onMouseUp);
     canvas.on("mouse:wheel", onMouseWheel);
 
-    canvas.on("selection:created", onSelection);
-    canvas.on("selection:updated", onSelection);
-
     return () => {
       canvas.off("mouse:down", onMouseDown);
       canvas.off("mouse:move", onMouseMove);
       canvas.off("mouse:up", onMouseUp);
       canvas.off("mouse:wheel", onMouseWheel);
-
-      canvas.off("selection:created", onSelection);
-      canvas.off("selection:updated", onSelection);
     };
-  }, [canvas]);
+  }, [canvas, onMouseDown, onMouseMove, onMouseUp, onMouseWheel]);
 };

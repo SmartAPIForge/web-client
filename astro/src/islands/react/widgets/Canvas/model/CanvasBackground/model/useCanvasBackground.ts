@@ -7,6 +7,7 @@ import {
 import { useStore } from "@nanostores/react";
 import { Line, type Canvas } from "fabric";
 import { useEffect } from "react";
+import { sizeStore } from "@/react/entities/Canvas/model/size.ts";
 
 const { STROKE, STROKE_WIDTH } = CONSTS.CANVAS.GRID.LINE;
 
@@ -60,6 +61,7 @@ const drawGrid = (canvas: Canvas, zoom: Zoom): Line[] => {
 };
 
 export const useCanvasBackground = (canvas: Canvas | null) => {
+  const $sizeStore = useStore(sizeStore);
   const $zoomStore = useStore(zoomStore);
   const $offsetStore = useStore(offsetStore);
 
@@ -67,6 +69,7 @@ export const useCanvasBackground = (canvas: Canvas | null) => {
     if (!canvas) return;
 
     const lines = drawGrid(canvas, $zoomStore);
+
     return () => clearGrid(canvas, lines);
-  }, [canvas, $zoomStore, $offsetStore]);
+  }, [canvas, $zoomStore, $offsetStore, $sizeStore]);
 };
