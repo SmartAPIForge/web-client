@@ -44,13 +44,15 @@ export interface ProjectResponse {
   info: {
     createdAt: {
       low: number;
-    },
+    };
     data: string;
     status: ApiStatus;
     updatedAt: {
       low: number;
     };
-  }
+    urlZip?: string;
+    urlDeploy?: string;
+  };
 }
 
 export interface ProjectsState {
@@ -157,101 +159,91 @@ export const clearProjects = () => {
 };
 
 // Helper to update a single project in the store
-const updateProjectInStore = (
-  projectId: string,
-  updatedProject: Partial<Project>,
-) => {
-  // const currentState = $projects.get();
-  //
-  // const updatedItems = currentState.items.map((project) => {
-  //   if (project.data?.id === projectId) {
-  //     return {
-  //       ...project,
-  //       data: {
-  //         ...project.data,
-  //         ...updatedProject,
-  //         // Update lastUpdate time
-  //         lastUpdate: new Date().toISOString().split("T")[0],
-  //       },
-  //     };
-  //   }
-  //   return project;
-  // });
-  //
-  // $projects.setKey("items", updatedItems);
+const updateProjectInStore = (updatedProject: ProjectResponse) => {
+  const currentState = $projects.get();
+
+  const updatedItems = currentState.items.map((project) => {
+    if (
+      project.composeId.owner === updatedProject.composeId.owner &&
+      project.composeId.name === updatedProject.composeId.name
+    ) {
+      return {
+        ...updatedProject,
+      };
+    }
+    return project;
+  });
+
+  $projects.setKey("items", updatedItems);
 };
 
 // Start a project
 export const startProject = async (projectId: string) => {
-  try {
-    $projects.setKey("operationInProgress", true);
-    $projects.setKey("operationError", null);
-
-    // Optimistically update UI
-    updateProjectInStore(projectId, { status: ApiStatus.RUNNING });
-
-    // Make API request to start the project
-    await api.post(`/project/${projectId}/start`);
-
-    $projects.setKey("operationInProgress", false);
-  } catch (error) {
-    console.error("Failed to start project:", error);
-
-    // Revert optimistic update
-    updateProjectInStore(projectId, { status: ApiStatus.STOPPED });
-
-    $projects.setKey("operationInProgress", false);
-    $projects.setKey(
-      "operationError",
-      "Failed to start project. Please try again.",
-    );
-  }
+  // try {
+  //   $projects.setKey("operationInProgress", true);
+  //   $projects.setKey("operationError", null);
+  //
+  //   // Optimistically update UI
+  //   updateProjectInStore(projectId, { status: ApiStatus.RUNNING });
+  //
+  //   // Make API request to start the project
+  //   await api.post(`/project/${projectId}/start`);
+  //
+  //   $projects.setKey("operationInProgress", false);
+  // } catch (error) {
+  //   console.error("Failed to start project:", error);
+  //
+  //   // Revert optimistic update
+  //   updateProjectInStore(projectId, { status: ApiStatus.STOPPED });
+  //
+  //   $projects.setKey("operationInProgress", false);
+  //   $projects.setKey(
+  //     "operationError",
+  //     "Failed to start project. Please try again.",
+  //   );
+  // }
 };
 
 // Stop a project
 export const stopProject = async (projectId: string) => {
-  try {
-    $projects.setKey("operationInProgress", true);
-    $projects.setKey("operationError", null);
-
-    // Optimistically update UI
-    updateProjectInStore(projectId, { status: ApiStatus.STOPPED });
-
-    // Make API request to stop the project
-    await api.post(`/project/${projectId}/stop`);
-
-    $projects.setKey("operationInProgress", false);
-  } catch (error) {
-    console.error("Failed to stop project:", error);
-
-    // Revert optimistic update
-    updateProjectInStore(projectId, { status: ApiStatus.RUNNING });
-
-    $projects.setKey("operationInProgress", false);
-    $projects.setKey(
-      "operationError",
-      "Failed to stop project. Please try again.",
-    );
-  }
+  // try {
+  //   $projects.setKey("operationInProgress", true);
+  //   $projects.setKey("operationError", null);
+  //
+  //   // Optimistically update UI
+  //   updateProjectInStore(projectId, { status: ApiStatus.STOPPED });
+  //
+  //   // Make API request to stop the project
+  //   await api.post(`/project/${projectId}/stop`);
+  //
+  //   $projects.setKey("operationInProgress", false);
+  // } catch (error) {
+  //   console.error("Failed to stop project:", error);
+  //
+  //   // Revert optimistic update
+  //   updateProjectInStore(projectId, { status: ApiStatus.RUNNING });
+  //
+  //   $projects.setKey("operationInProgress", false);
+  //   $projects.setKey(
+  //     "operationError",
+  //     "Failed to stop project. Please try again.",
+  //   );
+  // }
 };
 
 // Download a project
-export const downloadProject = async (projectId: string) => {
+export const downloadProject = async (projectData: ProjectResponse) => {
   try {
     $projects.setKey("operationInProgress", true);
     $projects.setKey("operationError", null);
 
-    // Make API request to get download URL
-    const response = await api.get(`/project/${projectId}/download`);
-
-    // Get the download URL from the response
-    const { downloadUrl } = response.data;
+    const downloadUrl = projectData.info.urlZip;
 
     // Create an invisible anchor element to trigger the download
     if (downloadUrl && typeof window !== "undefined") {
       const a = document.createElement("a");
       a.href = downloadUrl;
-      a.download = `project-${projectId}.zip`;
+      a.download = `project-${projectData.composeId.owner}-${projectData.composeId.name}.zip`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

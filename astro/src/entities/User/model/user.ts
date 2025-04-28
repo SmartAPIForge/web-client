@@ -36,7 +36,6 @@ export async function initAuth() {
   }
 
   try {
-
     const token = localStorage.getItem("token");
     const refreshToken = localStorage.getItem("refreshToken");
 

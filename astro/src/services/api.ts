@@ -12,7 +12,7 @@ api.interceptors.request.use(
   (config) => {
     console.log("API request interceptor running");
     const token = localStorage.getItem("token");
-    console.log('token', token);
+    console.log("token", token);
 
     if (token) {
       config.headers.Authorization = `${token}`;
@@ -31,7 +31,10 @@ api.interceptors.response.use(
     console.error("API response error:", error);
     const originalRequest = error.config;
 
-    if ([401, 403].includes(error.response?.status) && !originalRequest._retry) {
+    if (
+      [401, 403].includes(error.response?.status) &&
+      !originalRequest._retry
+    ) {
       originalRequest._retry = true;
 
       try {

@@ -6,19 +6,16 @@ import { ConfigureBarWidget } from "@/react/widgets/ConfigureBar/ui/ConfigureBar
 import { ToolBarWidget } from "@/react/widgets/ToolBar/ui/ToolBarWidget";
 import { ManageWidget } from "../islands/react/widgets/ManageBar/ui/ManageBarWidget";
 import { PagesWidget } from "../islands/react/widgets/Pages/ui/PagesWidget";
-import { ProtectedComponent } from "@/react/shared/ProtectedComponent";
 ---
 
 <BaseLayout title="API Generation">
-  <ProtectedComponent client:load>
-    <div class="canvas-container">
-      <PagesWidget client:load />
-      <CanvasWidget client:load />
-      <ToolBarWidget client:load />
-      <ConfigureBarWidget client:load />
-      <ManageWidget client:load />
-    </div>
-  </ProtectedComponent>
+  <div class="canvas-container">
+    <PagesWidget client:load />
+    <CanvasWidget client:load />
+    <ToolBarWidget client:load />
+    <ConfigureBarWidget client:load />
+    <ManageWidget client:load />
+  </div>
 </BaseLayout>
 
 <style>
