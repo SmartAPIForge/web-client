@@ -4,12 +4,17 @@ import styles from "./SignInFormWidget.module.scss";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { AuthError, authService } from "@/services/auth.ts";
+import { CONSTS } from "@/consts.ts";
+import { useAuth } from "@/react/shared/hooks/useAuth.ts";
 
 // Define the form input interface
 interface IFormInput {
   email: string;
   password: string;
+}
+
+interface SignInFormWidgetProps {
+  redirectUrl?: string;
 }
 
 // Create a Yup validation schema
@@ -29,8 +34,10 @@ const validationSchema = yup
   })
   .required();
 
-export const SignInFormWidget: FC = () => {
-  const [error, setError] = useState<string | null>(null);
+export const SignInFormWidget: FC<SignInFormWidgetProps> = ({
+  redirectUrl = CONSTS.DEFAULT_REDIRECT,
+}) => {
+  const { signIn, error } = useAuth();
 
   // Initialize the form with yupResolver
   const {
@@ -44,13 +51,75 @@ export const SignInFormWidget: FC = () => {
   // Handle form submission
   const onSubmit: SubmitHandler<IFormInput> = async (credentials) => {
     try {
-      await authService.login(credentials);
-      window.location.href = "/profile";
-    } catch (e) {
-      if (e instanceof AuthError) {
-        setError(e.message);
+      console.log("Starting sign-in process");
+
+      // Check if localStorage is available
+      try {
+        const testKey = "_test_localStorage_";
+        localStorage.setItem(testKey, "test");
+        if (localStorage.getItem(testKey) !== "test") {
+          console.error(
+            "localStorage test failed - storage not working properly",
+          );
+        } else {
+          localStorage.removeItem(testKey);
+          console.log("localStorage is available and working");
+        }
+      } catch (storageError) {
+        console.error("localStorage is not available:", storageError);
       }
-      console.error(e);
+
+      try {
+        const result = await signIn(credentials.email, credentials.password);
+        console.log("Sign-in successful, received data:", result);
+        console.log("Tokens in localStorage:", {
+          token: localStorage.getItem("token"),
+          refreshToken: localStorage.getItem("refreshToken"),
+        });
+
+        // Add slight delay before redirect to ensure localStorage operations complete
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 500);
+      } catch (signInError) {
+        console.error(
+          "Normal sign-in failed, trying direct API call:",
+          signInError,
+        );
+
+        // Fallback - try direct API call for debugging
+        try {
+          const response = await fetch(`${CONSTS.API_URL}/auth/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Direct API call successful:", data);
+
+          // Store tokens manually
+          localStorage.setItem("token", data.accessToken);
+          localStorage.setItem("refreshToken", data.refreshToken);
+
+          console.log("Tokens stored manually, redirecting...");
+          window.location.href = redirectUrl;
+        } catch (directApiError) {
+          console.error("Direct API call failed:", directApiError);
+          throw directApiError;
+        }
+      }
+    } catch (e) {
+      console.error("Sign-in failed with error:", e);
     }
   };
 

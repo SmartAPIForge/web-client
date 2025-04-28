@@ -1,10 +1,10 @@
-import { type FC, useState } from "react";
+import { type FC } from "react";
 import Button from "@/react/shared/ui/Button";
 import styles from "./SignUpFormWidget.module.scss";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { AuthError, authService } from "@/services/auth.ts";
+import { useAuth } from "@/react/shared/hooks/useAuth.ts";
 
 // Define the form input interface
 interface IFormInput {
@@ -37,7 +37,7 @@ const validationSchema = yup
   .required();
 
 export const SignUpFormWidget: FC = () => {
-  const [error, setError] = useState<string | null>(null);
+  const { signUp, error } = useAuth();
 
   // Initialize the form with yupResolver
   const {
@@ -51,12 +51,9 @@ export const SignUpFormWidget: FC = () => {
   // Handle form submission
   const onSubmit: SubmitHandler<IFormInput> = async (credentials) => {
     try {
-      await authService.register(credentials);
+      await signUp(credentials.email, credentials.password);
       window.location.href = "/sign-in";
     } catch (e) {
-      if (e instanceof AuthError) {
-        setError(e.message);
-      }
       console.error(e);
     }
   };

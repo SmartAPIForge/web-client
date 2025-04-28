@@ -1,4 +1,4 @@
-import { useState, type FC } from "react";
+import React, { useState, type FC } from "react";
 import {
   HttpMethodOptions,
   type Endpoint,
@@ -20,17 +20,14 @@ interface Props {
 }
 
 const ModelEndpoint: FC<Props> = ({ fields, endpoint }) => {
-  const [selectedHttpMethid, setSelectedHttpMethid] = useState(endpoint.type);
+  const [selectedHttpMethod, setSelectedHttpMethod] = useState(endpoint.type);
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as HttpMethod;
-    setSelectedHttpMethid(value);
+    setSelectedHttpMethod(value);
     setEndpointHttpMethodType(endpoint, value);
   };
 
-  console.log(endpoint);
-
-  // TODO: Add change method, accesebility, req/res dto.
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -46,7 +43,7 @@ const ModelEndpoint: FC<Props> = ({ fields, endpoint }) => {
             value: type,
             label: HttpMethodOptions[type as HttpMethod],
           }))}
-          value={selectedHttpMethid}
+          value={selectedHttpMethod}
           onChange={handleSelectChange}
           name={"Http Method"}
         />
@@ -66,21 +63,26 @@ const ModelEndpoint: FC<Props> = ({ fields, endpoint }) => {
           ))}
         </div>
       </div>
-      <div className={styles.requestDtoContainer}>
-        <p>Request DTO</p>
-        <div className={styles.cols}>
-          {fields.map((field) => (
-            <div key={`field-endpoint-req-${field.id}`} className={styles.row}>
-              <p>{field.name}</p>
-              <Input
-                type="checkbox"
-                checked={endpoint.query.includes(field.name)}
-                onChange={() => toggleRequestField(endpoint, field.name)}
-              />
-            </div>
-          ))}
+      {endpoint.type !== HttpMethodOptions.POST && (
+        <div className={styles.requestDtoContainer}>
+          <p>Request DTO</p>
+          <div className={styles.cols}>
+            {fields.map((field) => (
+              <div
+                key={`field-endpoint-req-${field.id}`}
+                className={styles.row}
+              >
+                <p>{field.name}</p>
+                <Input
+                  type="checkbox"
+                  checked={endpoint.query.includes(field.name)}
+                  onChange={() => toggleRequestField(endpoint, field.name)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

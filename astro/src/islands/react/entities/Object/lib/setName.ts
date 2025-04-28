@@ -1,12 +1,15 @@
 import { Objects } from "../model/objects";
 import type { Model } from "../model/types";
 import { Group, IText, type Rect } from "fabric";
-import {CONSTS} from "@/consts.ts";
+import { CONSTS } from "@/consts.ts";
 
 export const setName = (objectIdentifier: Model, name: string) => {
   const updatedObjects = Objects.get().map((obj) => {
     if (obj.id === objectIdentifier.id) {
-      name = name.replace(/\n/g, "").slice(0, CONSTS.NAMES.MAX_CHARACTERS).trim();
+      name = name
+        .replace(/\n/g, "")
+        .slice(0, CONSTS.NAMES.MAX_CHARACTERS)
+        .trim();
 
       // TODO: Move logic to another layer.
       const group = obj.generatorConfiguration.instance as Group;

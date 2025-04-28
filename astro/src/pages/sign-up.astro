@@ -1,38 +1,6 @@
 ---
 import FilledLayout from "@/layouts/FilledLayout.astro";
 import { SignUpFormWidget } from "@/react/widgets/SignUpForm/ui/SignUpFormWidget";
-// import { request } from "../api/requests";
-
-// let error = "";
-//
-// if (Astro.request.method === "POST") {
-//   try {
-//     const data = await Astro.request.formData();
-//
-//     const email = data.get("email");
-//     const password = data.get("password");
-//     const confirmedPassword = data.get("confirmed-password");
-//
-//     if (password !== confirmedPassword) {
-//       error = "Passwords do not match.";
-//       throw new Error(error);
-//     }
-//
-//     const response = await request("/auth/register", "POST", "", {
-//       email,
-//       password,
-//     });
-//     if (response && response.ok) {
-//       return Astro.redirect("/sign-in");
-//     }
-//
-//     error = "Something went wrong. Please try again later.";
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       console.error(error.message);
-//     }
-//   }
-// }
 ---
 
 <FilledLayout title="Sign up">

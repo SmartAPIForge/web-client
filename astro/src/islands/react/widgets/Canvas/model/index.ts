@@ -5,6 +5,7 @@ import { useObjectManagement } from "src/islands/react/widgets/Canvas/model/Obje
 import { useCanvasBackground } from "src/islands/react/widgets/Canvas/model/CanvasBackground";
 import { CONSTS } from "@/consts";
 import { setSize } from "@/react/entities/Canvas/model/size.ts";
+import { useDrawCurvedLine } from "@/react/widgets/Canvas/model/ObjectManagement/model/useDrawCurvedLine.ts";
 
 export const useCanvas = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null);
@@ -12,6 +13,10 @@ export const useCanvas = (canvasRef: React.RefObject<HTMLCanvasElement>) => {
   useCanvasInteraction(canvas);
   useCanvasBackground(canvas);
   useObjectManagement(canvas);
+
+  const { drawCurvedLine } = useDrawCurvedLine(canvas);
+
+  // drawCurvedLine();
 
   useEffect(() => {
     if (canvasRef.current === null) return;

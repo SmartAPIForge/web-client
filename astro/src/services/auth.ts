@@ -1,146 +1,127 @@
+import { authStore } from "@/entities/User";
 import api from "./api";
-import axios, { AxiosError } from "axios";
-
-interface ApiError {
-  message: string;
-  statusCode?: number;
-  errors?: string[];
-}
-
-export class AuthError extends Error {
-  constructor(
-    public message: string,
-    public statusCode?: number,
-    public errors?: string[],
-  ) {
-    super(message);
-    this.name = "AuthError";
-  }
-}
-
-const handleApiError = (error: unknown): never => {
-  if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError<ApiError>;
-
-    if (axiosError.response) {
-      const errorData = axiosError.response.data as ApiError;
-      throw new AuthError(
-        errorData.message || "Authentication failed",
-        axiosError.response.status,
-        errorData.errors,
-      );
-    } else if (axiosError.request) {
-      throw new AuthError(
-        "No response from server. Please check your internet connection.",
-      );
-    } else {
-      throw new AuthError("Failed to make request: " + axiosError.message);
-    }
-  }
-
-  throw new AuthError(
-    error instanceof Error ? error.message : "An unexpected error occurred",
-  );
-};
-
-interface RefreshResponse {
-  token: string;
-}
-
-interface LoginResponse {
-  token: string;
-}
-
-interface RegisterResponse {}
-
-interface LoginCredentials {
-  email: string;
-  password: string;
-}
-
-interface RegisterCredentials {
-  email: string;
-  password: string;
-}
 
 export const authService = {
-  async login(credentials: LoginCredentials): Promise<LoginResponse> {
+  async signUp(email: string, password: string) {
+    authStore.set({ ...authStore.get(), isLoading: true, error: null });
+
     try {
-      if (!credentials.email.trim()) {
-        throw new AuthError("Email is required");
-      }
-      if (!credentials.password.trim()) {
-        throw new AuthError("Password is required");
+      await api.post("/auth/register", { email, password });
+
+      authStore.set({
+        ...authStore.get(),
+        isLoading: false,
+      });
+
+      window.location.href = "/sign-in";
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message || "Ошибка регистрации";
+
+      authStore.set({
+        ...authStore.get(),
+        isLoading: false,
+        error: errorMessage,
+      });
+      throw error;
+    }
+  },
+
+  async signIn(email: string, password: string) {
+    authStore.set({ ...authStore.get(), isLoading: true, error: null });
+
+    try {
+      console.log("Making API request to /auth/login");
+      const response = await api.post("/auth/login", { email, password });
+      console.log("API response received:", response.data);
+
+      const { accessToken, refreshToken } = response.data;
+
+      // Add try-catch blocks for localStorage operations
+      try {
+        console.log("Setting tokens in localStorage");
+        localStorage.setItem("token", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        console.log("Tokens set successfully, verifying...");
+        console.log("Stored tokens:", {
+          token: localStorage.getItem("token"),
+          refreshToken: localStorage.getItem("refreshToken"),
+        });
+      } catch (storageError) {
+        console.error("Error saving to localStorage:", storageError);
       }
 
-      const response = await api.post<LoginResponse>(
-        "http://localhost:4321/api/auth/login",
-        credentials,
-      );
-      if (!response.data.token) {
-        throw new AuthError("Invalid response from server: missing token");
-      }
-
-      localStorage.setItem("token", response.data.token);
+      authStore.set({
+        ...authStore.get(),
+        accessToken,
+        refreshToken,
+        isLoading: false,
+        isInitialized: true,
+      });
 
       return response.data;
-    } catch (error) {
-      throw handleApiError(error);
+    } catch (error: any) {
+      console.error("API login error:", error);
+      const errorMessage = error.response?.data?.message || "Ошибка входа";
+
+      authStore.set({
+        ...authStore.get(),
+        isLoading: false,
+        error: errorMessage,
+        isInitialized: false,
+      });
+      throw error;
     }
+  },
+
+  async signOut() {
+    try {
+    } catch (error) {
+      console.error("Ошибка при выходе", error);
+    }
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+
+    authStore.set({
+      user: null,
+      accessToken: null,
+      refreshToken: null,
+      isLoading: false,
+      error: null,
+      isInitialized: false,
+    });
   },
 
   async refresh() {
-    try {
-      const response = await api.post<RefreshResponse>(
-        "http://localhost:4321/api/auth/refresh",
-        {
-          withCredentials: true,
-        },
-      );
+    const oldRefreshToken = localStorage.getItem("refreshToken");
 
-      if (response.data.token) {
-        localStorage.setItem("token", response.data.token);
+    if (!oldRefreshToken) {
+      throw new Error("Нет refresh token");
+    }
+
+    try {
+      const response = await api.post("/auth/refresh", {
+        refreshToken: oldRefreshToken,
+      });
+
+      const { accessToken, refreshToken } = response.data;
+
+      localStorage.setItem("token", accessToken);
+      if (refreshToken) {
+        localStorage.setItem("refreshToken", refreshToken);
       }
+
+      authStore.set({
+        ...authStore.get(),
+        accessToken,
+        refreshToken,
+      });
 
       return response.data;
     } catch (error) {
-      localStorage.removeItem("token");
-      throw handleApiError(error);
-    }
-  },
-
-  async register(credentials: RegisterCredentials): Promise<RegisterResponse> {
-    try {
-      if (!credentials.email.trim()) {
-        throw new AuthError("Email is required");
-      }
-      if (!credentials.password.trim()) {
-        throw new AuthError("Password is required");
-      }
-      if (credentials.password.length < 8) {
-        throw new AuthError("Password must be at least 8 characters long");
-      }
-
-      const response = await api.post<RegisterResponse>(
-        "http://localhost:4321/api/auth/register",
-        {
-          email: credentials.email,
-          password: credentials.password,
-        },
-      );
-
-      return response.data;
-    } catch (error) {
-      throw handleApiError(error);
-    }
-  },
-
-  logout() {
-    try {
-      localStorage.removeItem("token");
-      localStorage.clear();
-    } catch (error) {
-      console.error("Error during logout:", error);
+      await this.signOut();
+      throw error;
     }
   },
 };

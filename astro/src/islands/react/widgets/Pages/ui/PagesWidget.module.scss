@@ -1,0 +1,32 @@
+.bottomRightBarContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100dvw;
+  border-radius: 6px 0 0 0;
+  padding: 1.5rem;
+  z-index: 4;
+  backdrop-filter: blur(1px);
+
+  & * {
+    font-weight: 500;
+  }
+}
+
+.largeInput {
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  min-width: 240px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+
+  &:hover,
+  &:focus {
+    border-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}

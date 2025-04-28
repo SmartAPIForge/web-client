@@ -1,41 +1,6 @@
 ---
 import FilledLayout from "@/layouts/FilledLayout.astro";
 import { SignInFormWidget } from "@/react/widgets/SignInForm/ui/SignInFormWidget";
-// import { request } from "../api/requests";
-//
-let error = "";
-//
-// if (Astro.request.method === "POST") {
-//   try {
-//     const data = await Astro.request.formData();
-//
-//     const email = data.get("email");
-//     const password = data.get("password");
-//
-//     const response = await request("/auth/login", "POST", "", {
-//       email,
-//       password,
-//     });
-//
-//     if (response && response.ok) {
-//       const { accessToken, refreshToken } = await response.json();
-//       Astro.cookies.set("accessToken", accessToken);
-//       Astro.cookies.set("refreshToken", refreshToken, {
-//         httpOnly: true,
-//         secure: true,
-//         path: "/",
-//         maxAge: 60 * 60 * 24 * 7, // 1 week
-//       });
-//       return Astro.redirect("/");
-//     } else {
-//       error = "Invalid credentials. Please try again.";
-//     }
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       console.error(error.message);
-//     }
-//   }
-// }
 ---
 
 <FilledLayout title="Sign in">

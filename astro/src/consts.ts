@@ -26,5 +26,8 @@ export const CONSTS = {
       },
     },
   },
+  PROFILE_PATH: "/profile",
+  DEFAULT_REDIRECT: "/profile",
   API_URL: import.meta.env.PUBLIC_API,
+  ASTRO_API_URL: import.meta.env.PUBLIC_ASTRO_API,
 };
