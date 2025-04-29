@@ -7,7 +7,10 @@ FROM base AS prod-deps
 RUN npm install --prod
 
 FROM base AS dev-deps
+# First install all dependencies
 RUN npm install
+# Then run the paraglide-js compilation separately
+RUN npx paraglide-js compile --project ./project.inlang --outdir ./src/paraglide
 
 # Build stage
 FROM dev-deps AS build
