@@ -18,16 +18,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build and run Docker container
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies and build
         run: |
           cd astro
-          docker build -t web-client .
-          docker stop web-client || true
-          docker rm web-client || true
-          docker run -d \
-            --name web-client \
-            --restart unless-stopped \
-            -p 4321:4321 \
-            -e PUBLIC_API=${{ secrets.PUBLIC_API }} \
-            -e PUBLIC_ASTRO_API=${{ secrets.PUBLIC_ASTRO_API }} \
-            web-client 
+          npm install -g pm2
+          npm install
+          npm run build
+
+      - name: Deploy with PM2
+        run: |
+          cd astro
+          pm2 stop web-client || true
+          pm2 delete web-client || true
+          pm2 start ./dist/server/entry.mjs --name web-client -- --port 4321
+          pm2 save 
