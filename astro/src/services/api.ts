@@ -65,7 +65,8 @@ api.interceptors.response.use(
         localStorage.removeItem("token");
         localStorage.removeItem("refreshToken");
         // Redirect to login
-        window.location.href = "/sign-in";
+
+        // window.location.href = "/sign-in";
         return Promise.reject(refreshError);
       }
     }
