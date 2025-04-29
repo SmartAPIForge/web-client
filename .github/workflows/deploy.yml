@@ -33,7 +33,10 @@ jobs:
       - name: Deploy with PM2
         run: |
           cd astro
-          pm2 stop web-client || true
-          pm2 delete web-client || true
+          # Check if process exists before stopping
+          if pm2 list | grep -q "web-client"; then
+            pm2 stop web-client
+            pm2 delete web-client
+          fi
           pm2 start ./dist/server/entry.mjs --name web-client -- --port 4321
           pm2 save 
