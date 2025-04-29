@@ -21,7 +21,7 @@ jobs:
       - name: Build and run Docker container
         run: |
           cd astro
-          docker build --target runtime-prod -t web-client .
+          docker build -t web-client .
           docker stop web-client || true
           docker rm web-client || true
           docker run -d \
