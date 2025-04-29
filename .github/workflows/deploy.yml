@@ -27,8 +27,9 @@ jobs:
         run: |
           cd astro
           npm install -g pm2
-          npm install
-          npm run build
+          npm install -g pnpm
+          pnpm install
+          pnpm run build
 
       - name: Deploy with PM2
         run: |
