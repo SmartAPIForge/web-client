@@ -39,5 +39,5 @@ jobs:
             pm2 stop web-client
             pm2 delete web-client
           fi
-          pm2 start ./dist/server/entry.mjs --name web-client -- --port 4321 --host 127.0.0.1
+          pm2 start ./dist/server/entry.mjs --name web-client -- --port 4321 --host 0.0.0.0
           pm2 save 
