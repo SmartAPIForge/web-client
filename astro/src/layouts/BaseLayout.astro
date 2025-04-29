@@ -1,19 +1,17 @@
 ---
 import { languageTag } from "@/paraglide/runtime";
-import * as m from "@/paraglide/messages.js";
 
 export interface BaseLayoutProps {
   title: string;
 }
 
-const { title = m.metaTitle() } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={languageTag()}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content={m.metaDescription()} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
     <meta name="generator" content={Astro.generator} />

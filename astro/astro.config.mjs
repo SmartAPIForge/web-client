@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import paraglide from "@inlang/paraglide-astro";
 
 import react from "@astrojs/react";
 
@@ -16,10 +15,6 @@ export default defineConfig({
   },
 
   integrations: [
-    paraglide({
-      project: "./project.inlang",
-      outdir: "./src/paraglide",
-    }),
     react(),
   ],
 
@@ -29,5 +24,5 @@ export default defineConfig({
 
   experimental: {
     session: true,
-  }
+  },
 });

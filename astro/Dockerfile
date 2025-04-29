@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
 FROM base AS prod-deps
-RUN npm install
+RUN npm install --prod
 
 FROM base AS dev-deps
 # First install all dependencies
