@@ -1,4 +1,4 @@
-import { useSpawnObject } from "@/react/features/ObjectManagement";
+import { useSpawnObject } from "src/islands/react/widgets/Canvas/model/ObjectManagement";
 import styles from "./ToolBarWidget.module.scss";
 
 const ToolBarWidget = () => {

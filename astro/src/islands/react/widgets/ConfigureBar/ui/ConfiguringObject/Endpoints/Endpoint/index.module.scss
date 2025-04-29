@@ -1,0 +1,164 @@
+.container {
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0.03);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  // Style for the Private checkbox in the top section
+  input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+    margin-right: 4px;
+
+    &:checked {
+      background-color: rgba(
+        255,
+        102,
+        0,
+        0.7
+      ); // Orange shade for private status
+      border-color: rgba(255, 102, 0, 0.8);
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 3px;
+        width: 6px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:hover {
+      border-color: rgba(255, 102, 0, 0.8);
+      background-color: rgba(255, 102, 0, 0.1);
+    }
+  }
+
+  // Add special styling for the label "Private"
+  label,
+  span {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+
+    &:hover {
+      color: rgba(255, 102, 0, 0.9);
+    }
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0;
+
+  p {
+    flex: 1;
+    margin: 0;
+  }
+
+  // Style for checkboxes within rows
+  input[type="checkbox"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+    background-color: transparent;
+    cursor: pointer;
+    position: relative;
+
+    &:checked {
+      background-color: rgba(70, 130, 180, 0.6);
+      border-color: rgba(70, 130, 180, 0.8);
+
+      &:after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 2px;
+        width: 6px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    &:hover {
+      border-color: rgba(70, 130, 180, 0.8);
+    }
+  }
+}
+
+.cols {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+  width: 100%;
+}
+
+.methodLabel {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: rgba(70, 130, 180, 0.3);
+}
+
+.responseDtoContainer,
+.requestDtoContainer {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-left: 3px solid rgba(70, 130, 180, 0.5);
+
+  p:first-child {
+    margin-top: 0;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+  }
+
+  .cols {
+    padding-left: 0.5rem;
+  }
+}
+
+.responseDtoContainer {
+  border-left-color: rgba(60, 179, 113, 0.6); // Green shade for response
+}
+
+.requestDtoContainer {
+  border-left-color: rgba(106, 90, 205, 0.6); // Purple shade for request
+}

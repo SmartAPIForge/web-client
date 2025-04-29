@@ -2,20 +2,45 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: clamp(240px, 300px, 500px);
-  border-radius: 4px 0 0 4px;
-  padding: 0.5rem 1rem;
-  background-color: rgba(0, 0, 0, 0.3);
+  width: clamp(30%, 400px, 40%);
+  border-radius: 8px 0 0 8px;
+  padding: 0.75rem 1rem 1rem;
+  background-color: rgba(20, 20, 30, 0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: -2px 0 15px rgba(0, 0, 0, 0.2);
   z-index: 2;
+  max-height: 100dvh;
+  overflow: auto;
+  scrollbar-width: thin;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(25, 25, 35, 0.9);
+  }
 
   & * {
     font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}
+
+.headerBox {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  h4 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.95);
   }
 }
 
 .configuringObjectsBox {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+
   & * {
     font-weight: 300;
     font-size: calc(1rem * 3 / 4);

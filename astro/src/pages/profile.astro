@@ -1,38 +1,21 @@
 ---
 import FilledLayout from "@/layouts/FilledLayout.astro";
-
-const profileData = {
-  username: "rumblfn",
-  email: "example@mail.com",
-  imageUrl: "https://placehold.co/400x400",
-};
+import { ProfileDataWidget } from "@/islands/react/widgets/ProfileData/ui/ProfileDataWidget";
+import { ActiveApisWidget } from "@/islands/react/widgets/ActiveApis";
+import { ProtectedComponent } from "@/react/shared/ProtectedComponent";
 ---
 
 <FilledLayout title="Profile">
-  <h1 class="title">Profile</h1>
-  <div class="info-box">
-    <div class="data-box">
-      <div class="image-box">
-        <img src={profileData.imageUrl} class="image" />
-      </div>
-      <div class="raw-data">
-        <h3>About</h3>
-        <div class="raw-data-box">
-          <div>
-            <h4 class="raw-label">Username</h4>
-            <p class="raw-value">{profileData.username}</p>
-          </div>
-          <div>
-            <h4 class="raw-label">Email</h4>
-            <p class="raw-value">{profileData.email}</p>
-          </div>
-        </div>
-      </div>
+  <ProtectedComponent client:load>
+    <h1 class="title">Profile</h1>
+    <div class="info-box appear-effect">
+      <ProfileDataWidget client:load />
     </div>
-  </div>
-  <div class="info-box">
-    <h3>Active APIs</h3>
-  </div>
+    <div class="info-box">
+      <h3>Active APIs</h3>
+      <ActiveApisWidget client:load />
+    </div>
+  </ProtectedComponent>
 </FilledLayout>
 
 <style>

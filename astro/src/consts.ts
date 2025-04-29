@@ -1,6 +1,9 @@
 export const CONSTS = {
   CONTRIBUTORS_LINK: "https://github.com/orgs/SmartAPIForge/people",
   GITHUB_ORG_LINK: "https://github.com/SmartAPIForge",
+  NAMES: {
+    MAX_CHARACTERS: 20,
+  },
   ZOOM: {
     MAX: 5,
     MIN: 0.2,
@@ -23,4 +26,8 @@ export const CONSTS = {
       },
     },
   },
+  PROFILE_PATH: "/profile",
+  DEFAULT_REDIRECT: "/profile",
+  API_URL: import.meta.env.PUBLIC_API,
+  ASTRO_API_URL: import.meta.env.PUBLIC_ASTRO_API,
 };

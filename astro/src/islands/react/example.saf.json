@@ -1,28 +1,20 @@
 {
   "general": {
-    "id": 1,
     "name": "testapi",
     "owner": "aaalace",
-    "version": "1.0",
-    "port": 8080,
     "autoAuth": false
   },
   "models": [
     {
-      "name": "Book",
+      "name": "starship",
       "fields": [
-        {
-          "name": "id",
-          "type": "int",
-          "isUnique": true
-        },
         {
           "name": "title",
           "type": "string",
           "isUnique": false
         },
         {
-          "name": "isFinished",
+          "name": "finished",
           "type": "bool",
           "isUnique": false
         }
@@ -31,17 +23,46 @@
         {
           "type": "GET",
           "query": ["id", "title"],
-          "responseDTO": ["id", "title", "isFinished"],
+          "responseDTO": ["title", "finished"],
           "private": false
         },
         {
           "type": "POST",
-          "responseDTO": ["id", "title"],
+          "responseDTO": ["title"],
           "private": true
         },
         {
           "type": "DELETE",
+          "query": ["id"],
           "responseDTO": ["id"],
+          "private": true
+        }
+      ]
+    },
+    {
+      "name": "almaz",
+      "fields": [
+        {
+          "name": "name",
+          "type": "string",
+          "isUnique": false
+        },
+        {
+          "name": "clever",
+          "type": "bool",
+          "isUnique": false
+        }
+      ],
+      "endpoints": [
+        {
+          "type": "GET",
+          "query": ["name"],
+          "responseDTO": [],
+          "private": false
+        },
+        {
+          "type": "POST",
+          "responseDTO": ["name"],
           "private": true
         }
       ]

@@ -4,13 +4,17 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import { CanvasWidget } from "@/react/widgets/Canvas/ui/CanvasWidget";
 import { ConfigureBarWidget } from "@/react/widgets/ConfigureBar/ui/ConfigureBarWidget";
 import { ToolBarWidget } from "@/react/widgets/ToolBar/ui/ToolBarWidget";
+import { ManageWidget } from "../islands/react/widgets/ManageBar/ui/ManageBarWidget";
+import { PagesWidget } from "../islands/react/widgets/Pages/ui/PagesWidget";
 ---
 
 <BaseLayout title="API Generation">
   <div class="canvas-container">
+    <PagesWidget client:load />
     <CanvasWidget client:load />
     <ToolBarWidget client:load />
     <ConfigureBarWidget client:load />
+    <ManageWidget client:load />
   </div>
 </BaseLayout>
 
