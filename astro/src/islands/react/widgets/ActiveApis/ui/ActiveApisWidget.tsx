@@ -136,54 +136,65 @@ const ActiveApisWidget = () => {
                         projectData.info.updatedAt.low * 1000,
                       ).toLocaleString()}
                     </p>
-                    <div
-                      className={styles.statusBadge}
-                      data-status={projectData.info.status}
-                    >
-                      {statusLabels[projectData.info.status] || "Unknown"}
+                    <div className={styles.badgesContainer}>
+                      <div
+                        className={styles.statusBadge}
+                        data-status={projectData.info.status}
+                      >
+                        {statusLabels[projectData.info.status] || "Unknown"}
+                      </div>
+                      {projectData.info.urlDeploy && (
+                        <a
+                          href={projectData.info.urlDeploy}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <p>{projectData.info.urlDeploy}</p>
+                        </a>
+                      )}
                     </div>
                   </div>
                   <div className={styles.apiActions}>
-                    {/* Start button - available for DEPLOY_SUCCESS and STOPPED */}
-                    {[ApiStatus.DEPLOY_SUCCESS, ApiStatus.STOPPED].includes(
-                      projectData.info.status,
-                    ) && (
-                      <button
-                        className={`${styles.actionButton} ${styles.startButton}`}
-                        // onClick={() => handleStartProject(projectData.id)}
-                        disabled={projects.operationInProgress}
-                      >
-                        Start
-                      </button>
-                    )}
+                    {/*/!* Start button - available for DEPLOY_SUCCESS and STOPPED *!/*/}
+                    {/*{[ApiStatus.DEPLOY_SUCCESS, ApiStatus.STOPPED].includes(*/}
+                    {/*  projectData.info.status,*/}
+                    {/*) && (*/}
+                    {/*  <button*/}
+                    {/*    className={`${styles.actionButton} ${styles.startButton}`}*/}
+                    {/*    // onClick={() => handleStartProject(projectData.id)}*/}
+                    {/*    disabled={projects.operationInProgress}*/}
+                    {/*  >*/}
+                    {/*    Start*/}
+                    {/*  </button>*/}
+                    {/*)}*/}
 
-                    {/* Stop button - available for RUNNING */}
-                    {projectData.info.status === ApiStatus.RUNNING && (
-                      <button
-                        className={`${styles.actionButton} ${styles.stopButton}`}
-                        // onClick={() => handleStopProject(projectData.id)}
-                        disabled={projects.operationInProgress}
-                      >
-                        Stop
-                      </button>
-                    )}
+                    {/*/!* Stop button - available for RUNNING *!/*/}
+                    {/*{projectData.info.status === ApiStatus.RUNNING && (*/}
+                    {/*  <button*/}
+                    {/*    className={`${styles.actionButton} ${styles.stopButton}`}*/}
+                    {/*    // onClick={() => handleStopProject(projectData.id)}*/}
+                    {/*    disabled={projects.operationInProgress}*/}
+                    {/*  >*/}
+                    {/*    Stop*/}
+                    {/*  </button>*/}
+                    {/*)}*/}
 
-                    {projectData.info.urlDeploy && (
-                      <button
-                        className={`${styles.actionButton} ${styles.copyButton}`}
-                        onClick={() =>
-                          handleCopyUrl(
-                            projectData.composeId.name,
-                            projectData.info.urlDeploy,
-                          )
-                        }
-                        disabled={!projectData.info.urlDeploy}
-                      >
-                        {copiedProjectId === projectData.composeId.name
-                          ? "Copied!"
-                          : "Copy"}
-                      </button>
-                    )}
+                    {/*{projectData.info.urlDeploy && (*/}
+                    {/*  <button*/}
+                    {/*    className={`${styles.actionButton} ${styles.copyButton}`}*/}
+                    {/*    onClick={() =>*/}
+                    {/*      handleCopyUrl(*/}
+                    {/*        projectData.composeId.name,*/}
+                    {/*        projectData.info.urlDeploy,*/}
+                    {/*      )*/}
+                    {/*    }*/}
+                    {/*    disabled={!projectData.info.urlDeploy}*/}
+                    {/*  >*/}
+                    {/*    {copiedProjectId === projectData.composeId.name*/}
+                    {/*      ? "Copied!"*/}
+                    {/*      : "Copy"}*/}
+                    {/*  </button>*/}
+                    {/*)}*/}
 
                     {/* Download button - available for all except NEW, GENERATE_PENDING, GENERATE_FAIL */}
                     {![
